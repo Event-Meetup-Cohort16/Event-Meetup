@@ -1,7 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import axios from 'axios';
-
 import Login from './login.js';
 import UserEvents from './user-events.js';
 import SearchEvents from './search-events.js';
@@ -72,7 +71,7 @@ class App extends React.Component {
           <div>
             <Route exact path="/" render={props => <Login currentUser={this.currentUser} />} />
             <Route path="/home" component={UserEvents} />
-            <Route path="/search" component={SearchEvents} />
+            <Route path="/search" render={props => <SearchEvents searchResults={this.state.searchResults}/>}/>
             <Route path="/event" component={EventTile} />
             <SearchForm apiCall={this.apiCall} />
           </div>
