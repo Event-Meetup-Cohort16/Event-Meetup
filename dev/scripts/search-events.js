@@ -18,6 +18,10 @@ export default class SearchEvents extends React.Component {
         {this.props.searchResults.map((result) => {
           return (
             <EventTile
+
+              // The email of the current user; will be used to push information to Firebase
+              currentUser={this.props.currentUser}
+
               // The name of the event
               eventName={result.name}
               // The ID of the event
@@ -49,7 +53,8 @@ export default class SearchEvents extends React.Component {
               // The name of the venue the event will be hosted at
               venue={result._embedded.venues[0].name}
               // The address of the venue the event will be hosted at
-              address={result._embedded.venues[0].address.line1} />
+              address={result._embedded.venues[0].address.line1}
+            />
           )
         })
         }

@@ -3,15 +3,29 @@ import ReactDOM from 'react-dom';
 
 // This component displays event info as returned by apiCall
 export default class EventTile extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    this.addEvent = this.addEvent.bind(this)
   }
+
+  // This method lives on the button at the bottom of the EventTile component
+  // On click, the user's directory in Firebase is sent an object which contains the User ID and the event ID
+  addEvent () {
+    const ref = firebase.database().ref(`users/${this.props.currentUser.user}/events/going`);
+    ref.push({
+      host: this.props.currentUser,
+      event: this.props.eventID
+      
+    })
+  }
+
     render() {
       return (
         <div>
           <h2>{this.props.eventName}</h2>
 
           <img src={`${this.props.eventImageURL}`} alt={`Promo image for ${this.props.eventName}`} />
+          <a href={`${this.props.eventURL}`}>{this.props.eventURL}</a>
 
           <p>{this.props.eventType}, {this.props.eventGenre}, {this.props.eventSubGenre}</p>
 
@@ -23,6 +37,7 @@ export default class EventTile extends React.Component {
           <p>{this.props.eventSalesStart} - {this.props.eventSalesEnd}</p>
 
           <p>${this.props.priceMin} - ${this.props.priceMax} {this.props.currency}</p>
+          <button onClick={this.addEvent}>Add to my Events</button>
         </div>
       )
     }
