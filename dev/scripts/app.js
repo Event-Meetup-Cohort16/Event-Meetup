@@ -59,7 +59,7 @@ class App extends React.Component {
 
     axios.get(`${apiURL}${keyword}${userCity}${userCountry}`).then((res)=> {
       console.log(res)
-      const searchResults = res.data._embedded;
+      const searchResults = res.data._embedded.events;
       console.log(searchResults);
       this.setState({searchResults});
     })
@@ -73,7 +73,10 @@ class App extends React.Component {
             <Route path="/home" component={UserEvents} />
             <Route path="/search" render={props => <SearchEvents searchResults={this.state.searchResults}/>}/>
             <Route path="/event" component={EventTile} />
+            
             <SearchForm apiCall={this.apiCall} />
+            <SearchEvents searchResults={this.state.searchResults} />
+         
           </div>
         </Router>
       )
