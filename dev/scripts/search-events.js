@@ -25,7 +25,7 @@ export default class SearchEvents extends React.Component {
               // The TicketMaster event URL
               eventURL={result.url}
               // The event image URL
-              eventImageURL={result.images.url}
+              eventImageURL={result.images[0].url}
               // The start date for ticket sales
               eventSalesStart={result.sales.public.startDateTime}
               // The end date for ticket sales
