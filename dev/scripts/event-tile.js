@@ -11,7 +11,7 @@ export default class EventTile extends React.Component {
         <div>
           <h2>{this.props.eventName}</h2>
 
-          <img src={`{this.props.eventImageURL}`} alt={`Promo image for {this.props.eventName}`} />
+          <img src={`${this.props.eventImageURL}`} alt={`Promo image for {this.props.eventName}`} />
 
           <p>{this.props.eventType}, {this.props.eventGenre}, {this.props.eventSubGenre}</p>
 
