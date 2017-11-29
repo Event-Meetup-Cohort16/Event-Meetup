@@ -6,6 +6,7 @@ import Login from './login.js';
 import UserEvents from './user-events.js';
 import SearchEvents from './search-events.js';
 import EventTile from './event-tile.js';
+import SearchForm from './search-form.js'
 
 import {
   BrowserRouter as Router,
@@ -43,22 +44,23 @@ class App extends React.Component {
   }
 
   // This method will get passed down as a prop on the Login component, and will be used to update the user state on the main App component depending on if a user is logged in or not.
-  currentUser (uid) {
+  currentUser (uid, email) {
     this.setState({
-      user: uid
+      user: uid,
+      email: email
     })
   }
 
   // This method accepts props from SearchForm and passes them into an api call, then returns event data to state.searchResults
-  apiCall(e, keyword, userCity, userCountry) {
-    e.preventDefault();
+  apiCall(keyword, userCity, userCountry) {
 
     keyword = `&keyword=${keyword}`;
-    userCity = `&city=${city}`;
+    userCity = `&city=${userCity}`;
     userCountry = `&countryCode=${userCountry}`
 
     axios.get(`${apiURL}${keyword}${userCity}${userCountry}`).then((res)=> {
-      const searchResults = res.data._embedded.events;
+      console.log(res)
+      const searchResults = res.data._embedded;
       console.log(searchResults);
       this.setState({searchResults});
     })
@@ -68,7 +70,7 @@ class App extends React.Component {
       return (
         <Router>
           <div>
-            <Route exact path="/" component={Login} />
+            <Route exact path="/" render={props => <Login currentUser={this.currentUser} />} />
             <Route path="/home" component={UserEvents} />
             <Route path="/search" component={SearchEvents} />
             <Route path="/event" component={EventTile} />
