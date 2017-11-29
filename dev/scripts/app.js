@@ -75,7 +75,7 @@ class App extends React.Component {
             <Route path="/event" component={EventTile} />
             
             <SearchForm apiCall={this.apiCall} />
-            <SearchEvents searchResults={this.state.searchResults} />
+            <SearchEvents currentUser={this.state.user} searchResults={this.state.searchResults} />
          
           </div>
         </Router>

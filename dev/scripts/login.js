@@ -18,7 +18,7 @@ export default class Login extends React.Component {
             .then((user) => {
                 // When the user logs in, set the user state on app.js to the user id
                 this.props.currentUser({
-                    ID: user.uid,
+                    user: user.uid,
                     email: user.email
                 })
             })
@@ -40,7 +40,7 @@ export default class Login extends React.Component {
             if (user) {
                 // Set the user state on app.js to an object with the user ID and email
                 this.props.currentUser({
-                    ID: user.uid,
+                    user: user.uid,
                     email: user.email
                 })
             } else {
