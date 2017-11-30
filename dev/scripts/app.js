@@ -87,14 +87,16 @@ class App extends React.Component {
       return (
         <Router>
           <div>
+            {/* delete this Link later, only used to test for now */}
+            <Link to="/home"><button>Show my Events</button></Link>
             <Route exact path="/" render={props => <Login currentUser={this.currentUser} />} />
-            <Route path="/home" component={UserEvents} />
+
+            <Route path="/home" render={props => <UserEvents currentUser={this.state.user} apiCall={this.apiCall} userEvents={this.userEvents} />} />
+
             <Route path="/search" render={props => <SearchEvents searchResults={this.state.searchResults}/>}/>
             <Route path="/event" component={EventTile} />
 
             <SearchForm apiCall={this.apiCall} />
-
-            <UserEvents apiCall={this.apiCall} userEvents={this.userEvents}/>
             <SearchEvents currentUser={this.state.user} currentPage={this.state.currentPage} searchResults={this.state.searchResults} />
          
           </div>
