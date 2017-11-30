@@ -36,16 +36,25 @@ class App extends React.Component {
       // state.currentpage will be used to keep track of where the user is on the website, and will also be used to conditionally render parts of the EventTile component.
       currentpage: '',
       // state.searchResults will hold an array of event data objects, as returned by the api call, based on users search terms
-      searchResults: []
+      searchResults: [],
+      // state.userEvents will hold an array of the users saved event data objects, as returned by a call to the firebase database
+      userEvents: [],
     }
     this.currentUser = this.currentUser.bind(this);
-    this.apiCall = this.apiCall.bind(this)
+    this.apiCall = this.apiCall.bind(this);
+    this.userEvents = this.userEvents.bind(this);
   }
 
   // This method will get passed down as a prop on the Login component, and will be used to update the user state on the main App component depending on if a user is logged in or not.
   currentUser (email) {
     this.setState({
       user: email
+    })
+  }
+
+  userEvents (array) {
+    this.setState({
+      userEvents: array
     })
   }
 
@@ -78,10 +87,11 @@ class App extends React.Component {
             <Route path="/home" component={UserEvents} />
             <Route path="/search" render={props => <SearchEvents searchResults={this.state.searchResults}/>}/>
             <Route path="/event" component={EventTile} />
-            
+
             <SearchForm apiCall={this.apiCall} />
             <SearchEvents currentUser={this.state.user} searchResults={this.state.searchResults} />
-         
+
+            <UserEvents apiCall={this.apiCall} userEvents={this.userEvents}/>
           </div>
         </Router>
       )
