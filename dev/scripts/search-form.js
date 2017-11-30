@@ -72,8 +72,6 @@ export default class SearchForm extends React.Component {
             <option>Whitehorse</option>
 
           </select>
-
-
           
           {/* Enter the event type you are looking for. e.g. */}
           <select
