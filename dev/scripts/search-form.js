@@ -52,20 +52,8 @@ export default class SearchForm extends React.Component {
             name="city"
             onChange={this.handleChangeCity}
             type="search"
-            placeholder="Enter a city"
+            placeholder="Enter a Canadian city"
             value={this.state.city} />
-
-          {/* Enter the country  */}
-          <select
-            id="searchForm__input--country"
-            name="country"
-            onChange={this.handleChangeCountry}
-            type="search"
-            placeholder="Enter a country"
-            value={this.state.country} >
-            <option value="CA">CA</option>
-            <option value="US">US</option>
-          </select>
 
 
           {/* Enter the event type you are looking for. e.g. */}
