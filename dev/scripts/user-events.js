@@ -28,9 +28,7 @@ export default class UserEvents extends React.Component {
           userEvents.push(firebaseEvents[goingEvent])
         }
 
-        userEvents.forEach((event, index) => {
-          this.props.apiCall('','','',event.eventID)
-        })
+        this.props.apiCall('', '', '', userEvents)
 
       })
     }

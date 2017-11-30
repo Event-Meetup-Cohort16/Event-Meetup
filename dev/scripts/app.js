@@ -63,21 +63,24 @@ class App extends React.Component {
   // If the API call is being used to populate the Search page, then use the first three paramaters, and leave the eventID param as an empty string.
   apiCall(keyword, userCity, userCountry, eventID) {
 
-    let eventSearch = '';
+    let eventSearch = [];
 
     if (eventID) {
-      eventSearch = `&id=${eventID}`
+      eventID.forEach(function (item) {
+        console.log(item)
+        eventSearch.push(`&id=${item.eventID}`)
+      });
+      console.log(eventSearch)
     } else {
       eventSearch = `&keyword=${keyword}&city=${userCity}&countryCode=${userCountry}`
     }
 
     axios.get(`${apiURL}${eventSearch}`).then((res)=> {
-        console.log(res)
-        const searchResults = res.data._embedded.events;
-        console.log(searchResults);
-        this.setState({searchResults});
-      }
-    )
+      const searchResults = res.data._embedded.events;
+      console.log(searchResults);
+      this.setState({searchResults});
+    })
+
   }
 
     render() {
