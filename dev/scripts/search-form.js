@@ -30,7 +30,7 @@ export default class SearchForm extends React.Component {
   handleSubmit(e) {
     e.preventDefault();
     //this will be the axios request (apiCall)
-    this.props.apiCall(this.state.keyword, this.state.userCity, this.state.userCountry);
+    this.props.apiCall(this.state.keyword, this.state.userCity, this.state.userCountry, '');
     //on submit, clear the inputs stored in searchForm state
     this.setState({
       keyword: '',
