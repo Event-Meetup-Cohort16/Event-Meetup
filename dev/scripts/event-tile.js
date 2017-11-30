@@ -72,18 +72,8 @@ export default class EventTile extends React.Component {
           <p>{this.props.eventSalesStart} - {this.props.eventSalesEnd}</p>
 
           <p>${this.props.priceMin} - ${this.props.priceMax} {this.props.currency}</p>
-<<<<<<< HEAD
-<<<<<<< HEAD
 
           <button onClick={this.addEvent}>Add to my Events</button>
-=======
-          
-          <button onClick={this.addEvent}>add event</button>
->>>>>>> dfe1cf403605b06614248e715367a5705107709b
-=======
-
-          <button onClick={this.addEvent}>Add to my Events</button>
->>>>>>> 6af6a618ff0be87589a35b3d573f0d1e23f94da3
         </div>
       )
     }
