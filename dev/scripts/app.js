@@ -43,21 +43,26 @@ class App extends React.Component {
   }
 
   // This method will get passed down as a prop on the Login component, and will be used to update the user state on the main App component depending on if a user is logged in or not.
-  currentUser (uid, email) {
+  currentUser (email) {
     this.setState({
-      user: uid,
-      email: email
+      user: email
     })
   }
 
   // This method accepts props from SearchForm and passes them into an api call, then returns event data to state.searchResults
-  apiCall(keyword, userCity, userCountry) {
+  // If the API call is being used to populate the User Events page, then leave the first three parameters as empty strings, and only fill in the eventID param
+  // If the API call is being used to populate the Search page, then use the first three paramaters, and leave the eventID param as an empty string.
+  apiCall(keyword, userCity, userCountry, eventID) {
 
-    keyword = `&keyword=${keyword}`;
-    userCity = `&city=${userCity}`;
-    userCountry = `&countryCode=${userCountry}`
+    let eventSearch = '';
 
-    axios.get(`${apiURL}${keyword}${userCity}${userCountry}`).then((res)=> {
+    if (eventID) {
+      eventSearch = `&id=${eventID}`
+    } else {
+      eventSearch = `&keyword=${keyword}&city=${userCity}&countryCode=${userCountry}`
+    }
+
+    axios.get(`${apiURL}${eventSearch}`).then((res)=> {
       console.log(res)
       const searchResults = res.data._embedded.events;
       console.log(searchResults);

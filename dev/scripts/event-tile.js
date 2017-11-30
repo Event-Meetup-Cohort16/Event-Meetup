@@ -10,12 +10,13 @@ export default class EventTile extends React.Component {
 
   // This method lives on the button at the bottom of the EventTile component
   // On click, the user's directory in Firebase is sent an object which contains the User ID and the event ID
+  // Regex is being used to replace '.' with ',' in email addresses for Firebase storing purposes
   addEvent () {
-    const ref = firebase.database().ref(`users/${this.props.currentUser.user}/events/going`);
+    const user = this.props.currentUser.email.replace(/\./g, ',')
+    const ref = firebase.database().ref(`users/${user}/events/going`);
     ref.push({
-      host: this.props.currentUser,
-      event: this.props.eventID
-      
+      eventID: this.props.eventID,
+      host: user
     })
   }
 
@@ -37,6 +38,7 @@ export default class EventTile extends React.Component {
           <p>{this.props.eventSalesStart} - {this.props.eventSalesEnd}</p>
 
           <p>${this.props.priceMin} - ${this.props.priceMax} {this.props.currency}</p>
+          
           <button onClick={this.addEvent}>Add to my Events</button>
         </div>
       )
