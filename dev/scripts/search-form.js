@@ -4,27 +4,27 @@ import ReactDOM from 'react-dom';
 export default class SearchForm extends React.Component {
   constructor() {
     super();
-    this.state = { 
+    this.state = {
       keyword: '',
       userCity:'',
       userCountry:'',
-   };
+    };
 
     this.handleChangeKeyword = this.handleChangeKeyword.bind(this);
     this.handleChangeCity = this.handleChangeCity.bind(this);
     this.handleChangeCountry = this.handleChangeCountry.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
-  }; 
-  
+  };
+
   handleChangeKeyword(e) {
     this.setState({ keyword: e.target.value });
-  }; 
+  };
   handleChangeCity(e) {
     this.setState({ userCity: e.target.value });
   };
   handleChangeCountry(e) {
     this.setState({ userCountry: e.target.value });
-  }; 
+  };
 
 
   handleSubmit(e) {
@@ -36,11 +36,11 @@ export default class SearchForm extends React.Component {
       keyword: '',
       userCity: '',
       userCountry: '' });
-  }; 
+  };
   render() {
     return (
       <div>
-        <form 
+        <form
           id="searchForm__form"
           action=""
           onSubmit={this.handleSubmit}
