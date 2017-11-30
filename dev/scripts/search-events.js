@@ -19,9 +19,10 @@ export default class SearchEvents extends React.Component {
           return (
             <EventTile
 
+              // The page the current user is on
+              currentPage={this.props.currentPage}
               // The email of the current user; will be used to push information to Firebase
               currentUser={this.props.currentUser}
-
               // The name of the event
               eventName={result.name}
               // The ID of the event

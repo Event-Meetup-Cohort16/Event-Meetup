@@ -5,19 +5,53 @@ import ReactDOM from 'react-dom';
 export default class EventTile extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      invited: false,
+      going: false
+    }
     this.addEvent = this.addEvent.bind(this)
   }
 
-  // This method lives on the button at the bottom of the EventTile component
-  // On click, the user's directory in Firebase is sent an object which contains the User ID and the event ID
-  // Regex is being used to replace '.' with ',' in email addresses for Firebase storing purposes
-  addEvent () {
+  addEvent() {
     const user = this.props.currentUser.email.replace(/\./g, ',')
     const ref = firebase.database().ref(`users/${user}/events/going`);
     ref.push({
       eventID: this.props.eventID,
       host: user
     })
+  }
+
+  componentDidMount() {
+
+    const user = this.props.currentUser.email.replace(/\./g, ',')
+    const eventsAttending = firebase.database().ref(`users/${user}/events/going`);
+    const eventsInvited = firebase.database().ref(`users/${user}/events/invited`);
+
+    const eventID = this.props.eventID
+
+    eventsAttending.on('value', snapshot => {
+      let event = snapshot.val()
+      for (let key in event) {
+        if (event[key].eventID === eventID) {
+          this.setState({
+            going: true,
+            invited: false
+          })
+        }
+      }
+    });
+
+    eventsInvited.on('value', snapshot => {
+      let event = snapshot.val()
+      for (let key in event) {
+        if (event[key].eventID === eventID) {
+          this.setState({
+            going: false,
+            invited: true
+          })
+        }
+      }
+    });
   }
 
     render() {
@@ -38,8 +72,13 @@ export default class EventTile extends React.Component {
           <p>{this.props.eventSalesStart} - {this.props.eventSalesEnd}</p>
 
           <p>${this.props.priceMin} - ${this.props.priceMax} {this.props.currency}</p>
+<<<<<<< HEAD
 
           <button onClick={this.addEvent}>Add to my Events</button>
+=======
+          
+          <button onClick={this.addEvent}>add event</button>
+>>>>>>> dfe1cf403605b06614248e715367a5705107709b
         </div>
       )
     }
