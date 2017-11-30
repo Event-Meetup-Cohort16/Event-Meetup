@@ -16,11 +16,11 @@ import Login from './login.js'
 export default class UserEvents extends React.Component {
     constructor(props) {
       super(props);
-      // this.componentDidMount = this.componentDidMount.bind(this);
     }
     // Check if the user has saved events when they visit the page and when the component mounts
     componentDidMount() {
-      firebase.database().ref(`users/simonpsteer@gmail,com/events/going`).on('value', (snapshot) => {
+      const user = this.props.currentUser.email.replace(/\./g, ',')
+      firebase.database().ref(`users/${user}/events/going`).on('value', (snapshot) => {
         const firebaseEvents = snapshot.val();
 
         const userEvents = [];
