@@ -91,6 +91,7 @@ class App extends React.Component {
 
             <SearchForm apiCall={this.apiCall} />
 <<<<<<< HEAD
+<<<<<<< HEAD
             <SearchEvents currentUser={this.state.user} searchResults={this.state.searchResults} />
 
             <UserEvents apiCall={this.apiCall} userEvents={this.userEvents}/>
@@ -98,6 +99,12 @@ class App extends React.Component {
             <SearchEvents currentUser={this.state.user} currentPage={this.state.currentPage} searchResults={this.state.searchResults} />
          
 >>>>>>> dfe1cf403605b06614248e715367a5705107709b
+=======
+
+            <UserEvents apiCall={this.apiCall} userEvents={this.userEvents}/>
+            <SearchEvents currentUser={this.state.user} currentPage={this.state.currentPage} searchResults={this.state.searchResults} />
+         
+>>>>>>> 6af6a618ff0be87589a35b3d573f0d1e23f94da3
           </div>
         </Router>
       )
