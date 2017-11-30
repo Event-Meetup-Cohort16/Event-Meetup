@@ -72,7 +72,7 @@ class App extends React.Component {
       });
       console.log(eventSearch)
     } else {
-      eventSearch = `&keyword=${keyword}&city=${userCity}&countryCode=${userCountry}`
+      eventSearch = `&keyword=${keyword}&city=${userCity}&countryCode=CA`
     }
 
     axios.get(`${apiURL}${eventSearch}`).then((res)=> {

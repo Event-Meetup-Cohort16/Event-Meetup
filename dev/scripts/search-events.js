@@ -44,12 +44,6 @@ export default class SearchEvents extends React.Component {
               eventGenre={result.classifications[0].genre.name}
               // The sub-genre of the event content
               eventSubGenre={result.classifications[0].subGenre.name}
-              // The currency the event tickets will be sold in
-              currency={result.priceRanges[0].currency}
-              // The lowest end of the price range for event tickets
-              priceMin={result.priceRanges[0].min}
-              // The highest end of the price range for event tickets
-              priceMax={result.priceRanges[0].max}
               // The name of the venue the event will be hosted at
               venue={result._embedded.venues[0].name}
               // The address of the venue the event will be hosted at
