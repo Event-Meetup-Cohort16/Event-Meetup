@@ -47,23 +47,47 @@ export default class SearchForm extends React.Component {
           role="search">
 
           {/* Enter a city  */}
-          <input
+          <select
             id="searchForm__input--city"
             name="city"
             onChange={this.handleChangeCity}
             type="search"
             placeholder="Enter a Canadian city"
-            value={this.state.city} />
+            value={this.state.city}>
+
+            <option>Toronto</option>
+            <option>Montreal</option>
+            <option>Ottawa</option>
+            <option>Edmonton</option>
+            <option>Victoria</option>
+            <option>Winnipeg</option>
+            <option>Fredericton</option>
+            <option>St. John's</option>
+            <option>Halifax</option>
+            <option>Charlottetown</option>
+            <option>Quebec City</option>
+            <option>Regina</option>
+            <option>Yellowknife</option>
+            <option>Iqaluit</option>
+            <option>Whitehorse</option>
+
+          </select>
 
 
+          
           {/* Enter the event type you are looking for. e.g. */}
-          <input
+          <select
             id="searchForm__input--keyword"
             name="q"
             onChange={this.handleChangeKeyword}
             type="search"
             placeholder="Enter the event type you are looking for. e.g."
-            value={this.state.keyword} />
+            value={this.state.keyword} >
+              <option>Music</option>
+              <option>Arts & Culture</option>
+              <option>Sports</option>
+              <option>Family</option>
+          </select>
 
           <button type="submit">Search</button>
         </form>
