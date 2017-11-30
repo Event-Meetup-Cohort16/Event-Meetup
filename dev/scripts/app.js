@@ -34,7 +34,7 @@ class App extends React.Component {
       // state.user will be used to keep track of who is logged in (or if nobody is logged in)
       user: '',
       // state.currentpage will be used to keep track of where the user is on the website, and will also be used to conditionally render parts of the EventTile component.
-      currentpage: '',
+      currentPage: '',
       // state.searchResults will hold an array of event data objects, as returned by the api call, based on users search terms
       searchResults: []
     }
@@ -63,11 +63,12 @@ class App extends React.Component {
     }
 
     axios.get(`${apiURL}${eventSearch}`).then((res)=> {
-      console.log(res)
-      const searchResults = res.data._embedded.events;
-      console.log(searchResults);
-      this.setState({searchResults});
-    })
+        console.log(res)
+        const searchResults = res.data._embedded.events;
+        console.log(searchResults);
+        this.setState({searchResults});
+      }
+    )
   }
 
     render() {
@@ -80,7 +81,7 @@ class App extends React.Component {
             <Route path="/event" component={EventTile} />
             
             <SearchForm apiCall={this.apiCall} />
-            <SearchEvents currentUser={this.state.user} searchResults={this.state.searchResults} />
+            <SearchEvents currentUser={this.state.user} currentPage={this.state.currentPage} searchResults={this.state.searchResults} />
          
           </div>
         </Router>
