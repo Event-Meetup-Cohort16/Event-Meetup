@@ -1,6 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import {
+    BrowserRouter as Router,
+    Route,
+    Link,
+    NavLink
+} from 'react-router-dom';
+
 const provider = new firebase.auth.GoogleAuthProvider()
 
 // Login component will get rendered on the main app component
@@ -53,9 +60,12 @@ export default class Login extends React.Component {
     render () {
         return (
             <div>
-                <a href="" onClick={this.login}>Login</a>
-                <br />
+                {this.props.loggedIn
+                ? 
                 <a href="" onClick={this.logout}>Logout</a>
+                :
+                <a href="" onClick={this.login}>Login with Google</a>
+                }
             </div>
         )
     }

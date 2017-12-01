@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 
 import CommentBox from './comment-box.js'
 import InviteUser from './invite-user.js'
+import EventTileButton from './event-tile-button.js'
 
 // This component displays event info as returned by apiCall
 export default class EventTile extends React.Component {
@@ -100,6 +101,7 @@ export default class EventTile extends React.Component {
 
           <button onClick={this.addEvent}>Add to my Events</button>
 
+          {/* <EventTileButton /> */}
           <InviteUser submitEmail={this.sendEmail} />
 
           <CommentBox />
