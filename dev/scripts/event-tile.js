@@ -95,7 +95,7 @@ export default class EventTile extends React.Component {
           <p>{this.props.eventDate}, {this.props.eventTime}</p>
           <p>{this.props.venue}, {this.props.address}</p>
 
-          <h3>Tickets on Sale</h3>
+          <h3>Tickets on Sale!</h3>
 
           <p>{this.props.eventSalesStart} - {this.props.eventSalesEnd}</p>
 
