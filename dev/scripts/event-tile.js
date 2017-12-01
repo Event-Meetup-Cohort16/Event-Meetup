@@ -16,6 +16,7 @@ export default class EventTile extends React.Component {
     const user = this.props.currentUser.email.replace(/\./g, ',')
     const ref = firebase.database().ref(`users/${user}/events/${this.props.eventID}`);
     ref.set({
+      host: user,
       going: true,
       invited: false
     })
@@ -27,7 +28,6 @@ export default class EventTile extends React.Component {
     const events = firebase.database().ref(`users/${user}/events`);
 
     events.on('value', snapshot => {
-      console.log(snapshot.val())
       let event = snapshot.val()
       for (let key in event) {
 
