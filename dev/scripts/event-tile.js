@@ -11,8 +11,6 @@ export default class EventTile extends React.Component {
     this.state = {
       invited: false,
       going: false,
-      // eventID: '17G8v3G6CwWyKP_',
-      // host: 'jen@jensaxena.com'
     }
     this.addEvent = this.addEvent.bind(this)
     this.sendEmail = this.sendEmail.bind(this)
@@ -29,30 +27,30 @@ export default class EventTile extends React.Component {
   }
 
   sendEmail(friend) {
-    // look for friend in Firebase
+    // look for friend in users database
     const toEmail = friend.replace(/\./g, ',')
-
     const friendRef = firebase.database().ref(`users/${toEmail}`);
 
-    // if friend exists
+    // if friend exists add event to friend
+    // with current user as host
+    // set invited to true
     friendRef.once('value').then( snapshot => {
       let user = snapshot.key
-      console.log(user)
 
-      // add eventID
-      // call this stuff from event tile rather than calling event tile from here
-      const host = this.props.currentUser.email.replace(/\./g, ',')
-      const ref = firebase.database().ref(`users/${user}/events/${this.props.eventID}`);
-      ref.set({
-        host: host,
-        going: false,
-        invited: true
-        // add hostname (currentUser)
-        // set invited to true on this eventID
+      if (user !== false) {
+        const host = this.props.currentUser.email.replace(/\./g, ',')
+        const ref = firebase.database().ref(`users/${user}/events/${this.props.eventID}`);
+        ref.set({
+          host: host,
+          going: false,
+          invited: true
+        })
 
-      // if not exists
-      // send email ??? profit
-      })
+      // if friend is not in database
+      // send invite email
+      } else {
+        // send email ??? profit
+      }
     })
   }
 
