@@ -6,17 +6,35 @@ import EventTile from './event-tile.js'
 import InviteUser from './invite-user.js'
 
 export default class EventHaps extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    this.state = {
+      eventID: '17G8v3G6CwWyKP_',
+      host: 'jen@jensaxena.com',
+    }
+    this.sendEmail = this.sendEmail.bind(this)
   }
-  sendEmail(email) {
-    console.log(email);
-    // first, check firebase for userFriend email
-    // users.
-    // const userFriend = this.props.currentUser.email.replace(/\./g, ',')
-    // if exists
-    // add event to userFriend's invite object on Firebase
-    // break
+  sendEmail(friend) {
+    // look for friend in Firebase
+    const toEmail = friend.replace(/\./g, ',')
+
+    const friendRef = firebase.database().ref(`users/${toEmail}`);
+
+    // if friend exists
+    friendRef.once('value').then( snapshot => {
+      let user = snapshot.key
+      console.log(user)
+
+      // add eventID
+      // call this stuff from event tile rather than calling event tile from here
+      const ref = firebase.database().ref(`users/${user}/events/${this.props.eventID}`);
+      ref.set({
+        going: false,
+        invited: true
+      })
+    })
+      // add hostname (currentUser)
+      // set invited to true on this eventID
 
     // if not exists
     // send email ??? profit
