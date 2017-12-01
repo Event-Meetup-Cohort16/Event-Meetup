@@ -1,6 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  NavLink
+} from 'react-router-dom';
+
 export default class EventTileButton extends React.Component {
   constructor(props) {
     super(props);
@@ -36,7 +43,7 @@ export default class EventTileButton extends React.Component {
 
     let linkAction = '';
 
-    if (this.props.rsvp === 'invited' or this.props.currentPage === 'event') {
+    if (this.props.rsvp === 'invited' || this.props.currentPage === 'event') {
       linkAction = e => e.preventDefault()
     }
 
@@ -58,17 +65,19 @@ export default class EventTileButton extends React.Component {
         {/* Route which determines how the button will appear on the search page */}
         <Route exact path="/search" render={
           <div>
-            {this.props.rsvp === 'going' && (this.props.currentPage == 'search' or this.props.currentPage == 'home')
+            {this.props.rsvp === 'going' && (this.props.currentPage == 'search' || this.props.currentPage == 'home')
             ?
               <button>Event Page</button>
             :
               ''
             }
             
-            {this.props.rsvp === 'invited' && (this.props.currentPage == 'search' or this.props.currentPage == 'home')
+            {this.props.rsvp === 'invited' && (this.props.currentPage == 'search' || this.props.currentPage == 'home')
             ?
-              <button onClick={this.acceptInvite}>Accept Invite</button>
-              <button onClick={this.declineInvite}>Decline Invite</button>
+              <div>
+                <button onClick={this.acceptInvite}>Accept Invite</button>
+                <button onClick={this.declineInvite}>Decline Invite</button>
+              </div>
             :
               ''
             }
@@ -88,7 +97,7 @@ export default class EventTileButton extends React.Component {
             }
           </div>
         } />
-        <Route exact path="/home" render={
+        <Route exact path="/home" render={props => 
           <button>{this.props.rsvp === 'going' ? 'Event Page' : 'Accept Invite'}</button>
         } />
         <Route exact path="/:host/:event" render={
