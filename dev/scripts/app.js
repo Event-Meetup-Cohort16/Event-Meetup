@@ -52,6 +52,7 @@ class App extends React.Component {
     })
   }
 
+  // This method will get passed down as a prop to the UserEvents component, and will be used to update the userEvents state to an array containing all the IDs for the events the user is attending
   userEvents (array) {
     this.setState({
       userEvents: array
@@ -60,22 +61,26 @@ class App extends React.Component {
 
   // This method accepts props from SearchForm and passes them into an api call, then returns event data to state.searchResults
   // If the API call is being used to populate the User Events page, then leave the first three parameters as empty strings, and only fill in the eventID param
-  // If the API call is being used to populate the Search page, then use the first three paramaters, and leave the eventID param as an empty string.
+  // If the API call is being used to populate the Search page, then use the first three paramaters, and leave the eventID param as an empty string
   apiCall(keyword, userCity, userCountry, eventID) {
 
-    let eventSearch = [];
+    // The eventSearch variable will represent the queries we will use in our API request
+    // Starts as an empty array because it needs to be pushed multiple id queries when querying by eventID
+    let queries = [];
 
+    // An if/else statement which will determine what will be queried from the API
+    // If we are populating the UserEvents component with the events they are going to and the events they have been invited to, we will be making queries by the event id
     if (eventID) {
       eventID.forEach(function (item) {
         console.log(item)
-        eventSearch.push(`&id=${item.eventID}`)
+        queries.push(`&id=${item.eventID}`)
       });
       console.log(eventSearch)
     } else {
-      eventSearch = `&keyword=${keyword}&city=${userCity}&countryCode=CA`
+      queries = `&keyword=${keyword}&city=${userCity}&countryCode=CA`
     }
 
-    axios.get(`${apiURL}${eventSearch}`).then((res)=> {
+    axios.get(`${apiURL}${queries}`).then((res)=> {
       const searchResults = res.data._embedded.events;
       console.log(searchResults);
       this.setState({searchResults});
@@ -93,7 +98,7 @@ class App extends React.Component {
 
             <Route path="/home" render={props => <UserEvents currentUser={this.state.user} apiCall={this.apiCall} userEvents={this.userEvents} />} />
 
-            <Route path="/search" render={props => <SearchEvents searchResults={this.state.searchResults}/>}/>
+            <Route exact path="/search" render={props => <SearchEvents searchResults={this.state.searchResults}/>}/>
             <Route path="/event" component={EventTile} />
 
             <SearchForm apiCall={this.apiCall} />
