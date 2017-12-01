@@ -19,6 +19,9 @@ export default class UserEvents extends React.Component {
     }
     // Check if the user has saved events when they visit the page and when the component mounts
     componentDidMount() {
+
+      // We need to store the user's email in Firebase as the key so we can send invites to other users, but Firebase can't store directories with the . character
+      // A regular expression is applied to the user's email which replaces . with , so we can store the user's email as the root directory to their data
       const user = this.props.currentUser.email.replace(/\./g, ',')
       firebase.database().ref(`users/${user}/events/going`).on('value', (snapshot) => {
         const firebaseEvents = snapshot.val();
