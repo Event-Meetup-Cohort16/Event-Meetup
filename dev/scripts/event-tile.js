@@ -101,9 +101,8 @@ export default class EventTile extends React.Component {
           <button onClick={this.addEvent}>Add to my Events</button>
 
           <InviteUser submitEmail={this.sendEmail} />
+          
 
-          <CommentBox />
-        </div>
       )
     }
 }
