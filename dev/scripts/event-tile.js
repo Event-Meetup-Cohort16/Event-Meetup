@@ -14,25 +14,22 @@ export default class EventTile extends React.Component {
 
   addEvent() {
     const user = this.props.currentUser.email.replace(/\./g, ',')
-    const ref = firebase.database().ref(`users/${user}/events/going`);
-    ref.push({
-      eventID: this.props.eventID,
-      host: user
+    const ref = firebase.database().ref(`users/${user}/events/${this.props.eventID}`);
+    ref.set({
+      going: true,
+      invited: false
     })
   }
 
   componentDidMount() {
 
     const user = this.props.currentUser.email.replace(/\./g, ',')
-    const eventsAttending = firebase.database().ref(`users/${user}/events/going`);
-    const eventsInvited = firebase.database().ref(`users/${user}/events/invited`);
+    const events = firebase.database().ref(`users/${user}/events/${this.props.eventID}`);
 
-    const eventID = this.props.eventID
-
-    eventsAttending.on('value', snapshot => {
+    events.on('value', snapshot => {
       let event = snapshot.val()
       for (let key in event) {
-        if (event[key].eventID === eventID) {
+        if (event[key].going === true) {
           this.setState({
             going: true,
             invited: false
@@ -41,17 +38,6 @@ export default class EventTile extends React.Component {
       }
     });
 
-    eventsInvited.on('value', snapshot => {
-      let event = snapshot.val()
-      for (let key in event) {
-        if (event[key].eventID === eventID) {
-          this.setState({
-            going: false,
-            invited: true
-          })
-        }
-      }
-    });
   }
 
     render() {

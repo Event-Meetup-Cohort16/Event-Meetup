@@ -73,9 +73,8 @@ class App extends React.Component {
     if (eventID) {
       eventID.forEach(function (item) {
         console.log(item)
-        queries.push(`&id=${item.eventID}`)
+        queries.push(`&id=${item}`)
       });
-      console.log(eventSearch)
     } else {
       queries = `&keyword=${keyword}&city=${userCity}&countryCode=CA`
     }

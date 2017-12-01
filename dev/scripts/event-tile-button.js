@@ -12,48 +12,43 @@ export default class EventTileButton extends React.Component {
 
   addEvent() {
     const user = this.props.currentUser.email.replace(/\./g, ',')
-    const ref = firebase.database().ref(`users/${user}/events/going`);
-    ref.push({
-      eventID: this.props.eventID,
-      host: user
+    const ref = firebase.database().ref(`users/${user}/events/${this.props.eventID}`);
+    ref.set({
+      going: true,
+      invited: false
     })
   }
 
-
   render() {
 
-    // Declare a variable which will determine whether clicking the <Link> will actually route the user to a new page or not. Depending on the state of currentPage on app.js, the <Link> may not need to take the user to a new page and e.preventDefault should be called.
-    let linkClick = ''
+    let linkAction = '';
 
-    // Declare variables which will determine what text appears in the <button> element, as well as what method will be executed onClick
-    let buttonClick = '';
-    let buttonText = '';
-
-    if (this.props.currentPage === 'search') {
-      buttonClick = this.addEvent;
-      linkClick = e => e.preventDefault();
-
-    } else if (this.props.currentPage === 'home') {
-      buttonClick = this.addEvent
-
-    } else if (this.props.currentPage === 'event') {
-      buttonClick = this.addEvent
-      
+    if (this.props.rsvp === 'invited' or this.props.currentPage === 'event') {
+      linkAction = e => e.preventDefault();
     }
-
 
     return (
 
       <Link
-        onClick={this.props.currentPage === 'home' && this.props.invited === true
-        ?  
-
-
-        :
-        e => e.preventDefault()}
+        onClick={linkAction}
         
         to={'/'}>
-        <button onClick={buttonClick}>{buttonText}</button>
+
+        {/* Route which determines how the button will appear on the search page */}
+        <Route exact path="/search" render={
+          <button>
+            {this.props.rsvp === 'going' ? 'Event Page' : ''}
+            {this.props.rsvp === 'invited' ? 'Accept Invite' : ''}
+            {!this.props.rsvp ? 'Add to my Events' : ''}
+          </button>
+        } />
+        <Route exact path="/home" render={
+          <button>{this.props.rsvp === 'going' ? 'Event Page' : 'Accept Invite'}</button>
+        } />
+        <Route exact path="/:host/:event" render={
+          <button>Leave Meetup</button>
+        } />
+        
       </Link>
     )
   }
