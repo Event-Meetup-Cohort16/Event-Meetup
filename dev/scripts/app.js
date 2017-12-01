@@ -74,7 +74,6 @@ class App extends React.Component {
     // If we are populating the UserEvents component with the events they are going to and the events they have been invited to, we will be making queries by the event id
     if (eventID) {
       eventID.forEach(function (item) {
-        console.log(item)
         queries.push(`&id=${item}`)
       });
     } else {
@@ -83,7 +82,6 @@ class App extends React.Component {
 
     axios.get(`${apiURL}${queries}`).then((res)=> {
       const searchResults = res.data._embedded.events;
-      console.log(searchResults);
       this.setState({searchResults});
     })
 

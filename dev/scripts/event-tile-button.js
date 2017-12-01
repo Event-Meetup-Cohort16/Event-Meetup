@@ -14,9 +14,22 @@ export default class EventTileButton extends React.Component {
     const user = this.props.currentUser.email.replace(/\./g, ',')
     const ref = firebase.database().ref(`users/${user}/events/${this.props.eventID}`);
     ref.set({
+      host: user,
       going: true,
       invited: false
     })
+  }
+
+  acceptInvite() {
+    // method for accepting invite goes in here
+  }
+
+  declineInvite() {
+    // method for declining invite goes in here
+  }
+
+  leaveEvent() {
+    // method for leaving event goes in here
   }
 
   render() {
@@ -24,7 +37,15 @@ export default class EventTileButton extends React.Component {
     let linkAction = '';
 
     if (this.props.rsvp === 'invited' or this.props.currentPage === 'event') {
-      linkAction = e => e.preventDefault();
+      linkAction = e => e.preventDefault()
+    }
+
+    let buttonAction = '';
+
+    if (this.props.rsvp === 'invited') {
+      buttonAction = addEvent()
+    } else if (this.props.currentPage === 'event') {
+      buttonAction = leaveEvent()
     }
 
     return (
@@ -36,11 +57,36 @@ export default class EventTileButton extends React.Component {
 
         {/* Route which determines how the button will appear on the search page */}
         <Route exact path="/search" render={
-          <button>
-            {this.props.rsvp === 'going' ? 'Event Page' : ''}
-            {this.props.rsvp === 'invited' ? 'Accept Invite' : ''}
-            {!this.props.rsvp ? 'Add to my Events' : ''}
-          </button>
+          <div>
+            {this.props.rsvp === 'going' && (this.props.currentPage == 'search' or this.props.currentPage == 'home')
+            ?
+              <button>Event Page</button>
+            :
+              ''
+            }
+            
+            {this.props.rsvp === 'invited' && (this.props.currentPage == 'search' or this.props.currentPage == 'home')
+            ?
+              <button onClick={this.acceptInvite}>Accept Invite</button>
+              <button onClick={this.declineInvite}>Decline Invite</button>
+            :
+              ''
+            }
+            
+            {!this.props.rsvp
+            ?
+              <button onClick={this.addEvent}>Add to my Events</button>
+            :
+              ''
+            }
+
+            {this.props.currentPage === 'event'
+            ?
+              <button onClick={this.leaveEvent}>Leave Event</button>
+            :
+              ''
+            }
+          </div>
         } />
         <Route exact path="/home" render={
           <button>{this.props.rsvp === 'going' ? 'Event Page' : 'Accept Invite'}</button>

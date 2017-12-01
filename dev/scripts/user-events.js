@@ -29,13 +29,11 @@ export default class UserEvents extends React.Component {
       const user = this.props.currentUser.email.replace(/\./g, ',')
       firebase.database().ref(`users/${user}/events`).on('value', (snapshot) => {
         const firebaseEvents = snapshot.val();
-
+        
         const userEvents = [];
         for (let goingEvent in firebaseEvents) {
-          userEvents.push(firebaseEvents[goingEvent].eventID)
+          userEvents.push(goingEvent)
         }
-
-        console.log(userEvents)
 
         this.props.apiCall('', '', '', userEvents)
 
