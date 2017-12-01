@@ -26,8 +26,8 @@ class Footer extends React.Component {
         return(
             <ul>
                 <li>
-                    <NavLink to="/home">My Events </NavLink>
-                    <NavLink to="/search">Search</NavLink>
+                    <NavLink to="/home" onClick={window.scrollTo(0, 0)}>My Events</NavLink>
+                    <NavLink to="/search" onClick={window.scrollTo(0, 0)}>Search</NavLink>
                     <a href="#" onClick={this.goBack}>Back</a>
                 </li>
             </ul>

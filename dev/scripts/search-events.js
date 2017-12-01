@@ -17,7 +17,6 @@ export default class SearchEvents extends React.Component {
         {this.props.searchResults.map((result) => {
           return (
             <EventTile
-
               // The page the current user is on
               currentPage={this.props.currentPage}
               // The email of the current user; will be used to push information to Firebase
