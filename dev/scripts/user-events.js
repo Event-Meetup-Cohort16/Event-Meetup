@@ -4,6 +4,10 @@ import ReactDOM from 'react-dom';
 import EventTile from './event-tile.js'
 import Login from './login.js'
 
+// pass event id & user id (email) to state of this component
+// that state will pass as props to a comment/haps/specific event page
+// disp
+
 // user logs in from login page
 // as soon as the user is logged in
 // the main page loads (that's User Events!)

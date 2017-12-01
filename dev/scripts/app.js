@@ -6,6 +6,8 @@ import UserEvents from './user-events.js';
 import SearchEvents from './search-events.js';
 import EventTile from './event-tile.js';
 import SearchForm from './search-form.js'
+import Footer from './footer.js'
+import EventHaps from './event-haps.js'
 
 import {
   BrowserRouter as Router,
@@ -75,7 +77,6 @@ class App extends React.Component {
         console.log(item)
         queries.push(`&id=${item.eventID}`)
       });
-      console.log(eventSearch)
     } else {
       queries = `&keyword=${keyword}&city=${userCity}&countryCode=CA`
     }
@@ -103,7 +104,10 @@ class App extends React.Component {
 
             <SearchForm apiCall={this.apiCall} />
             <SearchEvents currentUser={this.state.user} currentPage={this.state.currentPage} searchResults={this.state.searchResults} />
-         
+
+            <EventHaps />
+
+            <Footer />
           </div>
         </Router>
       )
