@@ -1,0 +1,24 @@
+// Colors
+$red: #ba4c53;
+$teal: #5d8e7d;
+$orange: #f2a260;
+$khaki: #bba274;
+
+// Type
+$headingFont: 'Roboto', sans-serif;
+$bodyFont: 'Open Sans', sans-serif;
+
+// Fluid Type Sizing
+$headingSize: calc(2rem + (7.5 - 2) * ((100vw - 300px) / (1600 - 300)));
+$bodySize: calc(1.6rem + (2 - 1.6) * ((100vw - 300px) / (1600 - 300)));
+
+html {
+  font-size: 62.5%; // 10px
+  line-height: 1.5; // Negotiable
+}
+
+.wrapper {
+  max-width: 1600px;
+  min-width: 300px;
+  width: 95vw; // Negotiable
+}
