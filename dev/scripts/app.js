@@ -96,14 +96,15 @@ class App extends React.Component {
             {this.state.user
             ?
             <div>
-            <Link to="/home"><button>Show my Events</button></Link>
-            <Route path="/home" render={props => <UserEvents currentUser={this.state.user} apiCall={this.apiCall} userEvents={this.userEvents} />} />
+            <Route exact path="/" render={props => <Link to="/home"><button>Show my Events</button></Link>} />
+                <Route path="/home" render={props => <UserEvents currentUser={this.state.user} apiCall={this.apiCall} userEvents={this.userEvents} />} />
+                <Route path="/home" render={props => <SearchEvents currentUser={this.state.user} currentPage={this.state.currentPage} searchResults={this.state.searchResults} />} />
 
-            <SearchForm apiCall={this.apiCall} />
+                
+                <Route path="/search" render={props => <SearchForm apiCall={this.apiCall} />} />
+                <Route path="/search" render={props => <SearchEvents currentUser={this.state.user} currentPage={this.state.currentPage} searchResults={this.state.searchResults} />} />
 
             <Route path="/event" component={EventTile} />
-
-            <SearchEvents currentUser={this.state.user} currentPage={this.state.currentPage} searchResults={this.state.searchResults} />
 
             <Footer apiCall={this.apiCall} />
 

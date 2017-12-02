@@ -75,7 +75,6 @@ export default class CommentBox extends React.Component {
       this.setState({comments: newComments});
       console.log(this.state)
 
-      
   }
 
 
