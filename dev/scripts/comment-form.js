@@ -29,8 +29,35 @@ export default class CommentForm extends React.Component {
     if(!text || !author) {
       return;
     }
+
+    const timeStamp = () => {
+      let options = {
+        month: '2-digit',
+        day: '2-digit',
+        year: '2-digit',
+        hour: '2-digit',
+        minute: '2-digit'
+      };
+      let now = new Date().toLocaleString('en-US', options);
+      return now;
+    }
+
+    var DateTime = timeStamp()
+
+    // Object Made to push to firebase
+    // console.log(userEmail)
+    var userEmail = this.props.userEmail
+    var commentInfo = {
+      author: userEmail, //change this to user logged in in the comment box
+      text: text,
+      time: DateTime
+    }
+
     // this.props.on Comment Submit passed down from Comment Box
     this.props.onCommentSubmit({ author: author, text: text });
+    //refer to comment-box for commentInfo on submit
+    this.props.submitForm(commentInfo)
+
     this.setState({ author: '', text: '' });
   }
 

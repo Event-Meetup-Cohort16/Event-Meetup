@@ -14,7 +14,36 @@ export default class CommentBox extends React.Component {
   this.handleCommentSubmit = this.handleCommentSubmit.bind(this)
   }
 
-  // when a comment is added
+
+  addComments(commentInfo) { // adding comments to database
+    console.log(commentInfo)
+
+    const dbRef = firebase.database().ref(`users/host/events/eventID/comments`);
+
+    dbRef.push(commentInfo).then((snapshot) => {
+      let newKey = snapshot.key;
+      let updateShoeRef = firebase.database().ref(`users/host/events/eventID/comments/${newKey}`);
+      commentInfo.key = newKey;
+      //updates comment with property of "key" (i.e. key: key)
+      updateShoeRef.update(commentInfo);
+    })
+  }
+  componentDidMount() { // showing comments already stored in database
+    const userRef = firebase.database().ref(`users/host/events/eventID/comments`);
+    userRef.on('value', (snapshot) => {
+      // console.log(snapshot.val())
+      const firebaseData = snapshot.val()
+      const commentData = []
+      for (let commentKey in firebaseData) {
+        commentData.push(firebaseData[commentKey])
+      }
+      this.setState({
+        comments: commentData
+      })
+    })
+
+  }
+
   handleCommentSubmit(comment) {
       const timeStamp = () => {
         let options = {
@@ -28,61 +57,42 @@ export default class CommentBox extends React.Component {
         return now;
       }
       //get user email from app component(to be passed down as props)
-      const host = this.props.userEmail
-      console.log(host)
+      // const userLoggedIn = this.props.userEmail
+      // console.log(userLoggedIn)
 
       var DateTime = timeStamp()
       console.log(DateTime)
 
 
-      // Sets the commentbox author to whoever 
+      
       var comments = this.state.comments;
       comment.id = Date.now();
       comment.time = DateTime;
-      comment.author = host;
+      comment.author = this.props.userEmail; // Sets the commentbox author to whoever is logged in
 
 
       var newComments = comments.concat([comment]);
       this.setState({comments: newComments});
       console.log(this.state)
 
-
-
-      
-      //this is the reference
-      const ref = firebase.database().ref(`users/${host}/events/${this.props.eventID}/comment`);
-      
-      ref.push({
-      author: host,
-      timestamp: this 
-      })
-
-      
-     
-
-    
-
-
-      //2. create a reference in user/{host}/event/comment 
-      
-      // const ref = firebase.database().ref(`users/${user}/events/${this.props.eventID}`);
-      // ref.set({
-      //   host: host,
-      //   going: false,
-      //   invited: true
-      //3. push the comment as an object
-      
   }
+
+
 
   render(){
     return(
       <div className="commentBox" >
         <h1>Comments </h1>
-        
-        <CommentForm onCommentSubmit={this.handleCommentSubmit} />
 
-        <CommentList 
-        comments={this.state.comments} />
+        <CommentForm
+          onCommentSubmit={this.handleCommentSubmit}
+          submitForm={this.addComments}
+          // userLoggedIn={userLoggedIn}
+        />
+
+        <CommentList
+          comments={this.state.comments} 
+          user={this.props.userEmail}/>
       
       </div>
     );
