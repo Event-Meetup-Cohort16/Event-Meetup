@@ -53,11 +53,9 @@ export default class CommentBox extends React.Component {
       const ref = firebase.database().ref(`users/${host}/events/${this.props.eventID}/comment`);
       
       ref.push({
-      author: host 
+      author: host,
       timestamp: this 
-
-          < CommentBox userEmail= { this.props.currentUser.email } />
-        </div>
+      })
 
       
      
