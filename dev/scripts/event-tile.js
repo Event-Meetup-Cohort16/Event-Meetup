@@ -103,11 +103,9 @@ export default class EventTile extends React.Component {
           <InviteUser submitEmail={this.sendEmail} />
 
           <CommentBox userEmail={this.props.currentUser.email} />
-          <CommentForm userEmail={this.props.currentUser.email} />
+
           </div>
 
-
-        </div>
       )
     }
 }
