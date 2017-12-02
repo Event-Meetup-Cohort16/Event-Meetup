@@ -45,6 +45,7 @@ export default class CommentBox extends React.Component {
   }
 
   handleCommentSubmit(comment) {
+      console.log(this.props.userEmail)
       const timeStamp = () => {
         let options = {
           month: '2-digit',
@@ -87,12 +88,13 @@ export default class CommentBox extends React.Component {
         <CommentForm
           onCommentSubmit={this.handleCommentSubmit}
           submitForm={this.addComments}
+          user={this.props.userEmail}
           // userLoggedIn={userLoggedIn}
         />
 
         <CommentList
           comments={this.state.comments} 
-          user={this.props.userEmail}/>
+          />
       
       </div>
     );
