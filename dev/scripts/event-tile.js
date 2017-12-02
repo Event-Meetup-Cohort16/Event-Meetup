@@ -15,6 +15,7 @@ export default class EventTile extends React.Component {
     }
     this.addEvent = this.addEvent.bind(this)
     this.sendEmail = this.sendEmail.bind(this)
+    this.checkRSVP = this.checkRSVP.bind(this)
   }
 
   addEvent() {
@@ -55,6 +56,19 @@ export default class EventTile extends React.Component {
     })
   }
 
+  // Check the state of the event tile to see if the user is going or has been invited. This will be used as a prop on the EventTileButton component in order to conditionally render the content of EventTileButton
+  checkRSVP() {
+    let rsvp;
+    if (this.state.going === true) {
+      rsvp = 'going'
+    } else if (this.state.invited === true) {
+      rsvp = 'invited'
+    } else {
+      rsvp = 'neither'
+    }
+    return rsvp
+  }
+
   componentDidMount() {
 
     const user = this.props.currentUser.email.replace(/\./g, ',')
@@ -64,12 +78,12 @@ export default class EventTile extends React.Component {
       let event = snapshot.val()
       for (let key in event) {
 
-        if (event[key].eventID === this.props.eventID && event[key].going === true) {
+        if (key === this.props.eventID && event[key].going === true) {
           this.setState({
             going: true,
             invited: false
           })
-        } else if (event[key].eventID === this.props.eventID && event[key].invited === true) {
+        } else if (key === this.props.eventID && event[key].invited === true) {
           this.setState({
             going: false,
             invited: true
@@ -97,17 +111,14 @@ export default class EventTile extends React.Component {
 
           <p>{this.props.eventSalesStart} - {this.props.eventSalesEnd}</p>
 
-          <button onClick={this.addEvent}>Add to my Events</button>
+          <EventTileButton currentUser={this.props.currentUser} rsvp={this.checkRSVP()} currentPage={this.props.currentPage} eventID={this.props.eventID} />
 
-          {/* <EventTileButton /> */}
           <InviteUser submitEmail={this.sendEmail} />
 
           <CommentBox userEmail={this.props.currentUser.email} />
           <CommentForm userEmail={this.props.currentUser.email} />
           </div>
 
-
-        </div>
       )
     }
 }
