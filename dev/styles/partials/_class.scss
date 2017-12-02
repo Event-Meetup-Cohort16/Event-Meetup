@@ -1,0 +1,17 @@
+.active {
+  background: $teal;
+  border-radius: 5px;
+  color: lighten($khaki, 10%);
+}
+.active:focus, .active:hover {
+  background: darken($teal, 10%);
+  text-shadow: none;
+}
+
+.comment {
+  text-align: left;
+}
+
+.commentAuthor {
+  color: darken($teal, 10%);
+}

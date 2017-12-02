@@ -29,10 +29,7 @@ export default class EventTile extends React.Component {
   }
 
   sendEmail(friend) {
-    // look for friend in users database
-    // if exists add event to friend
-    // with current user as host
-    // set invited to true
+    // Look for friend in db, if exists add event with current user as host & set invited to true
     const toEmail = friend.replace(/\./g, ',');
 
     firebase.database().ref(`users/${toEmail}`).once('value', (snapshot) => {
@@ -48,8 +45,7 @@ export default class EventTile extends React.Component {
           invited: true
         })
 
-      // if friend is not in database
-      // send invite email
+      // If friend is not in database, send invite email
       } else {
         document.location.href = `mailto:${friend}?subject=What's%20%20the%20Haps?&body=A%20friend%20has%20invited%20you%20to%20a%20meetup!%20Create%20an%20account%20to%20find%20out%20the%20Haps:%20http://whatsthehaps.com/thisisafakeURL`;
       }
@@ -89,7 +85,7 @@ export default class EventTile extends React.Component {
             invited: true
           })
         }
-        }
+      }
     });
 
   }
@@ -100,12 +96,11 @@ export default class EventTile extends React.Component {
           <h2>{this.props.eventName}</h2>
 
           <img src={`${this.props.eventImageURL}`} alt={`Promo image for ${this.props.eventName}`} />
-          <a href={`${this.props.eventURL}`}>{this.props.eventURL}</a>
+          <a href={`${this.props.eventURL}`}>See event on Ticketmaster</a>
 
           <p>{this.props.eventType}, {this.props.eventGenre}, {this.props.eventSubGenre}</p>
 
-          <p>{this.props.eventDate}, {this.props.eventTime}</p>
-          <p>{this.props.venue}, {this.props.address}</p>
+          <p>{this.props.eventDate}, {this.props.eventTime} {this.props.venue}, {this.props.address}</p>
 
           <h3>Tickets on Sale!</h3>
 
