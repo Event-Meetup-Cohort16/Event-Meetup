@@ -12,12 +12,16 @@ export default class EventTileButton extends React.Component {
   constructor(props) {
     super(props);
     this.addEvent = this.addEvent.bind(this)
+    this.linkAction = this.linkAction.bind(this)
+    this.buttonAction = this.buttonAction.bind(this)
+    this.button = this.button.bind(this)
   }
 
   // On click, the user's directory in Firebase is sent an object which contains the User ID and the event ID
   // Regex is being used to replace '.' with ',' in email addresses for Firebase storing purposes
 
-  addEvent() {
+  addEvent(e) {
+    e.preventDefault()
     const user = this.props.currentUser.email.replace(/\./g, ',')
     const ref = firebase.database().ref(`users/${user}/events/${this.props.eventID}`);
     ref.set({
@@ -39,72 +43,57 @@ export default class EventTileButton extends React.Component {
     // method for leaving event goes in here
   }
 
-  render() {
-
+  linkAction() {
     let linkAction = '';
-
     if (this.props.rsvp === 'invited' || this.props.currentPage === 'event') {
       linkAction = e => e.preventDefault()
     }
+    return linkAction;
+  }
 
+  buttonAction() {
     let buttonAction = '';
-
     if (this.props.rsvp === 'invited') {
       buttonAction = addEvent()
     } else if (this.props.currentPage === 'event') {
       buttonAction = leaveEvent()
     }
+    return buttonAction;
+  }
 
+  button() {
+    if (this.props.rsvp === 'going') {
+      return (
+      <button>Event Page</button>
+    )
+    } else if (this.props.rsvp === 'invited') {
+      return (
+        <div>
+          <button>Accept Invite</button>
+          <button>Decline Invite</button>
+        </div>
+    )
+    } else if (this.props.rsvp === 'neither') {
+      return (
+        <button onClick={this.addEvent}>Add Event</button>
+      )
+    }
+  }
+
+  render() {
     return (
 
       <Link
-        onClick={linkAction}
+        onClick={this.linkAction}
         
         to={'/'}>
 
         {/* Route which determines how the button will appear on the search page */}
-        <Route exact path="/search" render={
-          <div>
-            {this.props.rsvp === 'going' && (this.props.currentPage == 'search' || this.props.currentPage == 'home')
-            ?
-              <button>Event Page</button>
-            :
-              ''
-            }
-            
-            {this.props.rsvp === 'invited' && (this.props.currentPage == 'search' || this.props.currentPage == 'home')
-            ?
-              <div>
-                <button onClick={this.acceptInvite}>Accept Invite</button>
-                <button onClick={this.declineInvite}>Decline Invite</button>
-              </div>
-            :
-              ''
-            }
-            
-            {!this.props.rsvp
-            ?
-              <button onClick={this.addEvent}>Add to my Events</button>
-            :
-              ''
-            }
 
-            {this.props.currentPage === 'event'
-            ?
-              <button onClick={this.leaveEvent}>Leave Event</button>
-            :
-              ''
-            }
-          </div>
-        } />
-        <Route exact path="/home" render={props => 
-          <button>{this.props.rsvp === 'going' ? 'Event Page' : 'Accept Invite'}</button>
-        } />
-        <Route exact path="/:host/:event" render={
-          <button>Leave Meetup</button>
-        } />
+        {this.button()}
         
       </Link>
+      
     )
   }
 }
