@@ -16,6 +16,7 @@ export default class Login extends React.Component {
         super(props);
         this.login = this.login.bind(this)
         this.logout = this.logout.bind(this)
+        // this.addRef = this.addRef.bind(this)
     }
 
     // Login Method
@@ -28,6 +29,10 @@ export default class Login extends React.Component {
                     user: user.uid,
                     email: user.email
                 })
+                var userEmail = user.user.email.replace(/\./g, ',')
+                console.log(userEmail)
+                const dbRef = firebase.database().ref(`users/${userEmail}`)
+                dbRef.set('events')
             })
     }
 
@@ -40,6 +45,11 @@ export default class Login extends React.Component {
                 this.props.currentUser('')
             })
     }
+
+    // addRef(){ //when user logs in then add a reference
+    //     const user = this.props.currentUser.email.replace(/\./g, ',')
+    //     const dbRef = firebase.database().ref(`users/${user}`)
+    // }
 
     // Check if the user is logged in or not when they visit the page and when the component mounts
     componentDidMount() {
@@ -64,7 +74,10 @@ export default class Login extends React.Component {
                 ? 
                 <a href="" onClick={this.logout}><Link to="/">Logout</Link></a>
                 :
-                <a href="" onClick={this.login}>Login with Google</a>
+                <a href="" 
+                onClick={this.login} 
+                // onClick={this.addRef}
+                >Login with Google</a>
                 }
             </div>
         )
