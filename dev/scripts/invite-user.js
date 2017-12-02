@@ -22,16 +22,8 @@ export default class InviteUser extends React.Component {
     render() {
       return (
         <div>
-          <form
-            action=""
-            onSubmit={this.handleSubmit}
-            role="email">
-            <input
-              action=""
-              onChange={this.handleChange}
-              placeholder="Enter a friend's email to send them the haps!"
-              type="email"
-              value={this.state.friend} />
+          <form action="" onSubmit={this.handleSubmit} role="email">
+            <input action="" onChange={this.handleChange} placeholder="Enter a friend's email to send them the haps!" type="email" value={this.state.friend} />
             <button type="submit">Send Invite</button>
           </form>
         </div>
