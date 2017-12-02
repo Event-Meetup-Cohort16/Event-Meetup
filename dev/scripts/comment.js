@@ -16,6 +16,7 @@ export default class Comment extends React.Component {
           {/* passed down from comment list */}
         <span>{this.props.text} </span>
         <p>{this.props.time} </p>
+        <p>{this.props.key}</p>
         {/* <span>{this.props.time} </span> */}
       </div>
     );

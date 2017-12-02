@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
+import CommentForm from './comment-form.js'
 import CommentBox from './comment-box.js'
 import InviteUser from './invite-user.js'
 import EventTileButton from './event-tile-button.js'
@@ -101,7 +101,9 @@ export default class EventTile extends React.Component {
 
           {/* <EventTileButton /> */}
           <InviteUser submitEmail={this.sendEmail} />
-          
+          <CommentBox userEmail={this.props.currentUser.email} />
+          <CommentForm userEmail={this.props.currentUser.email} />
+          </div>
 
       )
     }
