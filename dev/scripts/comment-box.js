@@ -45,6 +45,7 @@ export default class CommentBox extends React.Component {
   }
 
   handleCommentSubmit(comment) {
+      console.log(this.props.userEmail)
       const timeStamp = () => {
         let options = {
           month: '2-digit',
@@ -68,7 +69,7 @@ export default class CommentBox extends React.Component {
       var comments = this.state.comments;
       comment.id = Date.now();
       comment.time = DateTime;
-      comment.author = this.props.userEmail; // Sets the commentbox author to whoever is logged in
+      // comment.author = this.props.userEmail; // Sets the commentbox author to whoever is logged in
 
 
       var newComments = comments.concat([comment]);
@@ -87,12 +88,13 @@ export default class CommentBox extends React.Component {
         <CommentForm
           onCommentSubmit={this.handleCommentSubmit}
           submitForm={this.addComments}
+          user={this.props.userEmail}
           // userLoggedIn={userLoggedIn}
         />
 
         <CommentList
           comments={this.state.comments} 
-          user={this.props.userEmail}/>
+          />
       
       </div>
     );
