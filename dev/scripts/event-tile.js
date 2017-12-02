@@ -105,7 +105,6 @@ export default class EventTile extends React.Component {
           <CommentBox userEmail={this.props.currentUser.email} />
 
           </div>
-
       )
     }
 }
