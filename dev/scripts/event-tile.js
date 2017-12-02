@@ -29,18 +29,18 @@ export default class EventTile extends React.Component {
 
   sendEmail(friend) {
     // look for friend in users database
-    const toEmail = friend.replace(/\./g, ',')
-    const friendRef = firebase.database().ref(`users/${toEmail}`);
-
-    // if friend exists add event to friend
+    // if exists add event to friend
     // with current user as host
     // set invited to true
-    friendRef.once('value').then( snapshot => {
-      let user = snapshot.key
+    const toEmail = friend.replace(/\./g, ',');
 
-      if (user !== false) {
-        const host = this.props.currentUser.email.replace(/\./g, ',')
-        const ref = firebase.database().ref(`users/${user}/events/${this.props.eventID}`);
+    firebase.database().ref(`users/${toEmail}`).once('value', (snapshot) => {
+      let exists = snapshot.val();
+
+      if (exists !== null) {
+        const host = this.props.currentUser.email.replace(/\./g, ',');
+        let ref = firebase.database().ref(`users/${toEmail}/events/${this.props.eventID}`);
+
         ref.set({
           host: host,
           going: false,
@@ -50,7 +50,7 @@ export default class EventTile extends React.Component {
       // if friend is not in database
       // send invite email
       } else {
-        // send email ??? profit
+        document.location.href = `mailto:${friend}?subject=What's%20%20the%20Haps?&body=A%20friend%20has%20invited%20you%20to%20a%20meetup!%20Create%20an%20account%20to%20find%20out%20the%20Haps:%20http://whatsthehaps.com/thisisafakeURL`;
       }
     })
   }
@@ -101,8 +101,8 @@ export default class EventTile extends React.Component {
 
           {/* <EventTileButton /> */}
           <InviteUser submitEmail={this.sendEmail} />
-          
 
+        </div>
       )
     }
 }
