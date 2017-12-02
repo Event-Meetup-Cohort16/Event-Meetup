@@ -62,7 +62,7 @@ export default class Login extends React.Component {
             <div>
                 {this.props.loggedIn
                 ? 
-                <a href="" onClick={this.logout}>Logout</a>
+                <a href="" onClick={this.logout}><Link to="/">Logout</Link></a>
                 :
                 <a href="" onClick={this.login}>Login with Google</a>
                 }
