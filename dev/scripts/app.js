@@ -136,6 +136,7 @@ class App extends React.Component {
 
                 {/* Routing for the search page */}
                 <Route path="/search" render={props => <SearchForm apiCall={this.apiCall} />} />
+
                 <Route path="/search" render={props =>
                   <SearchEvents
                     currentUser={this.state.user}
@@ -155,7 +156,9 @@ class App extends React.Component {
                     specificEvent={this.specificEvent}
                   />}
                 />
+
                 <Footer clearSearch={this.clearSearch} apiCall={this.apiCall} updatePage={this.updatePage} />
+          
             </div>
 
             :
