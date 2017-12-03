@@ -8,15 +8,11 @@ import {
 } from 'react-router-dom';
 
 export default class Header extends React.Component {
-  constructor() {
-
-  }
   render() {
     return (
-      <div className="header__div">
-        {/* <img className="header__img--logo" src="" alt=""/> */}
-        <h1 className="header__head--brand">Happening</h1>
-        <p className="header__p--tagline">Organize event meetups with all of your friends</p>
+      <div className="header__div clearfix">
+        <img className="header__img--logo" src="public/images/noun_1061378_cc_color_150x85.png" alt="The Haps logo"/>
+        <h1 className="header__head--brand">The Haps <span className="header__span--tagline">Event meetups with friends!</span></h1>
       </div>
     )
   }

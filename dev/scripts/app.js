@@ -10,10 +10,10 @@ import {
 import axios from 'axios';
 
 import EventTile from './event-tile.js';
-import Footer from './footer.js'
+import Footer from './footer.js';
 import Login from './login.js';
 import SearchEvents from './search-events.js';
-import SearchForm from './search-form.js'
+import SearchForm from './search-form.js';
 import UserEvents from './user-events.js';
 
 
