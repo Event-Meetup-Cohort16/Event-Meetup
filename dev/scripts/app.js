@@ -47,6 +47,7 @@ class App extends React.Component {
     this.apiCall = this.apiCall.bind(this);
     this.userEvents = this.userEvents.bind(this);
     this.updatePage = this.updatePage.bind(this);
+    this.clearSearch = this.clearSearch.bind(this);
   }
 
   // This method will get passed down as a prop on the Login component, and will be used to update the user state on the main App component depending on if a user is logged in or not.
@@ -89,9 +90,17 @@ class App extends React.Component {
 
   }
 
-  updatePage (page) {
+  // Used to update the currentPage state. Useful for conditional rendering where it does not make sense to use Routing
+  updatePage(page) {
     this.setState({
       currentPage: page
+    })
+  }
+
+  // This method empties the searchResults array. Each time the user wants to see their events or search for new events, the searchResults array must be emptied to avoid conflicts between searches; When searching for new events after viewing the user's events or vice-versa, the state on the event tile which determines whether the user is going, invited, or neither, will not update properly unless searchResults is cleared
+  clearSearch() {
+    this.setState({
+      searchResults: []
     })
   }
 
@@ -108,7 +117,12 @@ class App extends React.Component {
             ?
 
             <div>
-                <Route exact path="/" render={props => <button><Link to="/home" onClick={() => this.updatePage('home')}>Show my Events</Link></button>} />
+                <Route exact path="/" render={props => <button>
+                  <Link to="/home"
+                  onClick={() => {
+                  this.updatePage('home')
+                  this.clearSearch()
+                  }}>Show my Events</Link></button>} />
 
                 <Route path="/home" render={props => <UserEvents currentUser={this.state.user} apiCall={this.apiCall} userEvents={this.userEvents} />} />
                 <Route path="/home" render={props => <SearchEvents currentUser={this.state.user} currentPage={this.state.currentPage} searchResults={this.state.searchResults} />} />
@@ -119,7 +133,7 @@ class App extends React.Component {
 
                 <Route path="/event" component={EventTile} />
 
-                <Footer apiCall={this.apiCall} updatePage={this.updatePage} />
+                <Footer clearSearch={this.clearSearch} apiCall={this.apiCall} updatePage={this.updatePage} />
             </div>
 
             :
