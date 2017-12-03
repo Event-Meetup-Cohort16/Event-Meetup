@@ -12,6 +12,8 @@ export default class EventTileButton extends React.Component {
   constructor(props) {
     super(props);
     this.addEvent = this.addEvent.bind(this)
+    this.leaveEvent = this.leaveEvent.bind(this)
+    this.acceptInvite = this.acceptInvite.bind(this)
     this.linkAction = this.linkAction.bind(this)
     this.buttonAction = this.buttonAction.bind(this)
     this.button = this.button.bind(this)
@@ -31,24 +33,30 @@ export default class EventTileButton extends React.Component {
     })
   }
 
-  acceptInvite() {
+  acceptInvite(e) {
     // method for accepting invite goes in here
+    e.preventDefault()
+    const user = this.props.currentUser.email.replace(/\./g, ',')
+    const refGoing = firebase.database().ref(`users/${user}/events/${this.props.eventID}/going`);
+    refGoing.set(true)
+    const refInvited = firebase.database().ref(`users/${user}/events/${this.props.eventID}/invited`);
+    refInvited.set(false)
   }
 
-  declineInvite() {
-    // method for declining invite goes in here
-  }
-
-  leaveEvent() {
+  leaveEvent(e) {
     // method for leaving event goes in here
+    e.preventDefault()
+    const user = this.props.currentUser.email.replace(/\./g, ',')
+    const ref = firebase.database().ref(`users/${user}/events/${this.props.eventID}`).remove()
   }
 
+  // This method will determine whether the Link component will actually send the user to the "to" path or not. The Link should only work when the user is going to see a specific event page, otherwise prevent the default action of the Link component.
   linkAction() {
-    let linkAction = '';
+    let action = () => {};
     if (this.props.rsvp === 'invited' || this.props.currentPage === 'event') {
-      linkAction = e => e.preventDefault()
+      action = e => e.preventDefault()
     }
-    return linkAction;
+    return action;
   }
 
   buttonAction() {
@@ -64,15 +72,15 @@ export default class EventTileButton extends React.Component {
   button() {
     if (this.props.rsvp === 'going') {
       return (
-      <button>Event Page</button>
-    )
+        <button onClick={() => this.props.specificEvent(this.props.eventID)}>Event Page</button>
+      )
     } else if (this.props.rsvp === 'invited') {
       return (
         <div>
-          <button>Accept Invite</button>
-          <button>Decline Invite</button>
+          <button onClick={this.acceptInvite}>Accept Invite</button>
+          <button onClick={this.leaveEvent}>Decline Invite</button> 
         </div>
-    )
+      )
     } else if (this.props.rsvp === 'neither') {
       return (
         <button onClick={this.addEvent}>Add Event</button>
@@ -85,10 +93,7 @@ export default class EventTileButton extends React.Component {
 
       <Link
         onClick={this.linkAction}
-        
-        to={'/'}>
-
-        {/* Route which determines how the button will appear on the search page */}
+        to={`/event/${this.props.eventID}`}>
 
         {this.button()}
         

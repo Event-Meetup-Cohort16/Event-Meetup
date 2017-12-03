@@ -25,15 +25,34 @@ export default class Login extends React.Component {
         e.preventDefault();
         firebase.auth().signInWithPopup(provider)
             .then((user) => {
-                // When the user logs in, set the user state on app.js to the user id
+                // This will be used for a number of things
                 this.props.currentUser({
                     user: user.uid,
                     email: user.email
                 })
                 var userEmail = user.user.email.replace(/\./g, ',')
-                console.log(userEmail)
-                const dbRef = firebase.database().ref(`users/${userEmail}`)
-                dbRef.set('events')
+                const dbRef = firebase.database().ref(`users`)
+
+                // Check the database to see if the user who is logging in exists or not already
+                dbRef.on('value', (snapshot) => {
+
+                    // We can use a variable with a boolean value to determine whether the user exists or not. We will start it with a falsey value, then change it to a truthy value if the user does exist.
+                    let userExists = false;
+
+                    // This for...in loop runs through the 'users' directory, and checks to see if the user's email matches any emails that exist in that directory. If it does match, then update userExists's value to true
+                    for (let user in snapshot.val()) {
+                        if (user === userEmail) {
+                            userExists = true;
+                        }
+                    }
+
+                    // If the for...in loop could not match the user's email with any emails that already exist in the directory, then the user doesn't exist yet, we will have to create a directory for that user using .set()
+                    if (userExists === false) {
+                        const dbRef = firebase.database().ref(`users/${userEmail}`)
+                        dbRef.set(':~)')
+                    }
+
+                })
             })
     }
 
@@ -43,7 +62,7 @@ export default class Login extends React.Component {
         firebase.auth().signOut()
             .then(() => {
                 // When the user logs out, set the user state on app.js to an empty string
-                this.props.currentUser('')
+                this.props.currentUser()
             })
     }
 
@@ -63,7 +82,7 @@ export default class Login extends React.Component {
                 })
             } else {
                 // If not logged in, set the user state on app.js to an empty string
-                this.props.currentUser('')
+                this.props.currentUser()
             }
         })
     }

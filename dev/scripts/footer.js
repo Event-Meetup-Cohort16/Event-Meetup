@@ -40,6 +40,7 @@ class Footer extends React.Component {
                     </li>
                 </ul>
             </div>
+
         )
     }
 }
