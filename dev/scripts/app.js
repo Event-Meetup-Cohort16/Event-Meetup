@@ -130,10 +130,8 @@ class App extends React.Component {
 
                 <Route path="/search" render={props => <SearchForm apiCall={this.apiCall} />} />
                 <Route path="/search" render={props => <SearchEvents currentUser={this.state.user} currentPage={this.state.currentPage} searchResults={this.state.searchResults} />} />
-
-                <Route path="/event" component={EventTile} />
-
                 <Footer clearSearch={this.clearSearch} apiCall={this.apiCall} updatePage={this.updatePage} />
+          
             </div>
 
             :
