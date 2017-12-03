@@ -1,11 +1,8 @@
-.active {
-  background: $teal;
-  border-radius: 5px;
-  color: lighten($khaki, 10%);
-}
-.active:focus, .active:hover {
-  background: darken($teal, 10%);
-  text-shadow: none;
+.active,
+.eventTile__a--eventURL:active,
+.eventTile__a--eventURL:focus,
+.eventTile__a--eventURL:hover {
+  color: darken($red, 10%);
 }
 
 .comment__div {
@@ -16,6 +13,13 @@
   color: darken($teal, 10%);
 }
 
+.eventTile__img--eventImage {
+  display: block;
+  margin: 0 auto;
+  max-width: 90vw;
+}
+
+
 .footer__div {
   position: relative;
 }
@@ -24,11 +28,24 @@
   background: $khaki;
   bottom: 0;
   left: 0;
+  margin: 0;
   position: fixed;
   right: 0;
 }
-// .footer__li--link
-// .footer__a--back
+
+.footer__li--link {
+  padding: 1rem;
+  max-width: 30%;
+  a {
+    font-size: $footerSize;
+  }
+}
+
+.footer__li--link:active,
+.footer__li--link:focus,
+.footer__li--link:hover {
+  background: $teal;
+}
 
 .header__div {
   margin-bottom: 25vh;
@@ -96,6 +113,7 @@ a {
   font-weight: bold;
   text-decoration: none;
 }
+
 
 input, select, textarea {
   border: 1px solid $red;

@@ -98,11 +98,11 @@ export default class EventTile extends React.Component {
 
     render() {
       return (
-      
+
         <div className="eventTile__div">
           <h2 className="eventTile__head--eventName">{this.props.eventName}</h2>
 
-          <img className="eventTile__img--eventImg"src={`${this.props.eventImgURL}`} alt={`Promo image for ${this.props.eventName}`} />
+          <img className="eventTile__img--eventImage" src={`${this.props.eventImageURL}`} alt={`Promo image for ${this.props.eventName}`} />
           <a className="eventTile__a--eventURL"href={`${this.props.eventURL}`}>See event on Ticketmaster</a>
 
           <p className="eventTile__p--eventTags">{this.props.eventType}, {this.props.eventGenre}, {this.props.eventSubGenre}</p>
@@ -120,21 +120,21 @@ export default class EventTile extends React.Component {
             eventID={this.props.eventID}
             specificEvent={this.props.specificEvent}
           />
-          
+
           <EventTileButton currentUser={this.props.currentUser} rsvp={this.checkRSVP()} currentPage={this.props.currentPage} eventID={this.props.eventID} />
-{/* 
+{/*
           <InviteUser submitEmail={this.sendEmail} />
 
           <CommentBox userEmail={this.props.currentUser.email} /> */}
 
           {/* When landing on specific event page -- load 1. Comment Box 2. Invite User */}
-          <Route path="/event/specificEvent" 
+          <Route path="/event/specificEvent"
             render={props => <CommentBox userEmail={this.props.currentUser.email} />} />
           <Route path="/event/specificEvent"
             render={props => <InviteUser submitEmail={this.sendEmail} />} />
-          
+
           </div>
-      
+
       )
     }
 }
