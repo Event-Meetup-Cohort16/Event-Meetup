@@ -29,10 +29,16 @@ class Footer extends React.Component {
         return(
             <ul className="footer__ul">
                 <li className="footer__li--link">
-                    <NavLink to="/home" onClick={() => this.props.updatePage('home')}>My Events</NavLink>
+                    <NavLink to="/home" onClick={() => {
+                        this.props.updatePage('home')
+                        this.props.clearSearch()
+                        }}>My Events</NavLink>
                 </li>
                 <li className="footer__li--link">
-                    <NavLink to="/search" onClick={() => this.props.updatePage('search')}>Search</NavLink>
+                    <NavLink to="/search" onClick={() => {
+                        this.props.updatePage('search')
+                        this.props.clearSearch()
+                        }}>Search</NavLink>
                 </li>
                 <li className="footer__li--link">
                     <a className="footer__a--back" href="#" onClick={this.goBack}>Back</a>
