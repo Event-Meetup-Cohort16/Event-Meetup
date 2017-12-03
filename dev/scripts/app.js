@@ -1,19 +1,21 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import axios from 'axios';
-import Login from './login.js';
-import UserEvents from './user-events.js';
-import SearchEvents from './search-events.js';
-import EventTile from './event-tile.js';
-import SearchForm from './search-form.js'
-import Footer from './footer.js'
-
 import {
   BrowserRouter as Router,
   Route,
   Link,
   NavLink
 } from 'react-router-dom';
+
+import axios from 'axios';
+
+import EventTile from './event-tile.js';
+import Footer from './footer.js'
+import Login from './login.js';
+import SearchEvents from './search-events.js';
+import SearchForm from './search-form.js'
+import UserEvents from './user-events.js';
+
 
 var config = {
   apiKey: "AIzaSyDd8y8IyT-l37rZ1mZjqvrVLTUIICKMMlY",
@@ -101,23 +103,23 @@ class App extends React.Component {
             {/* the Login component takes a "loggedIn" prop which will be used to conditionally render the login/logout links in login.js */}
             <Login currentUser={this.currentUser} loggedIn={this.state.user.email} />
 
-            {/* A turnery which will render different components depending on if the user is logged in or not */}
+            {/* A ternary which will render different components depending on if the user is logged in or not */}
             {this.state.user
             ?
 
             <div>
                 <Route exact path="/" render={props => <button><Link to="/home" onClick={() => this.updatePage('home')}>Show my Events</Link></button>} />
 
-            <Route path="/home" render={props => <UserEvents currentUser={this.state.user} apiCall={this.apiCall} userEvents={this.userEvents} />} />
-            <Route path="/home" render={props => <SearchEvents currentUser={this.state.user} currentPage={this.state.currentPage} searchResults={this.state.searchResults} />} />
+                <Route path="/home" render={props => <UserEvents currentUser={this.state.user} apiCall={this.apiCall} userEvents={this.userEvents} />} />
+                <Route path="/home" render={props => <SearchEvents currentUser={this.state.user} currentPage={this.state.currentPage} searchResults={this.state.searchResults} />} />
 
-                
-            <Route path="/search" render={props => <SearchForm apiCall={this.apiCall} />} />
-            <Route path="/search" render={props => <SearchEvents currentUser={this.state.user} currentPage={this.state.currentPage} searchResults={this.state.searchResults} />} />
 
-            <Route path="/event" component={EventTile} />
+                <Route path="/search" render={props => <SearchForm apiCall={this.apiCall} />} />
+                <Route path="/search" render={props => <SearchEvents currentUser={this.state.user} currentPage={this.state.currentPage} searchResults={this.state.searchResults} />} />
 
-            <Footer apiCall={this.apiCall} updatePage={this.updatePage} />
+                <Route path="/event" component={EventTile} />
+
+                <Footer apiCall={this.apiCall} updatePage={this.updatePage} />
             </div>
 
             :

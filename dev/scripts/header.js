@@ -13,9 +13,10 @@ export default class Header extends React.Component {
   }
   render() {
     return (
-      <div>
-        <h1>What's the Haps?</h1>
-        <p>Organize event meetups with all of your friends!</p>
+      <div className="header__div">
+        {/* <img className="header__img--logo" src="" alt=""/> */}
+        <h1 className="header__head--brand">Happening</h1>
+        <p className="header__p--tagline">Organize event meetups with all of your friends</p>
       </div>
     )
   }

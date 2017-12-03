@@ -14,14 +14,9 @@ export default class CommentList extends React.Component {
     });
 
     return (
-      <div className="commentList">
+      <div className="commentList__div">
         {commentNodes}
-    
-     
       </div>
     );
-  
-
-
   }
 };

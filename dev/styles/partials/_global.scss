@@ -35,7 +35,7 @@ body {
   width: 95vw;
 }
 
-a, button, input, p, select, span {
+a, button, input, p, select, span, textarea {
   font-family: $bodyFont;
   font-size: $bodySize;
   margin: 1rem;
@@ -79,13 +79,17 @@ button:focus, button:hover {
   text-shadow: 0 1px 0 darken($teal, 20%);
 }
 
-button, input, select {
+button, input, select, textarea {
   border: 1px solid $red;
   border-radius: 5px;
 }
 
-input, select {
+input, select, textarea {
   background: rgba(255,255,255,0.2);
+}
+
+textarea {
+  resize: none;
 }
 
 img {

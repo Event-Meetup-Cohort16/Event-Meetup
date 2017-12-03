@@ -6,17 +6,17 @@ import ReactDOM from 'react-dom';
 export default class Comment extends React.Component {
   render() {
     return (
-      
-      <div className="comment">
+
+      <div className="comment__div">
         {/*  */}
-        <h2 className="commentAuthor">
+        <h3 className="comment__head--author">
           {/* passed down from comment list */}
           {this.props.author}
-        </h2>
+        </h3>
           {/* passed down from comment list */}
-        <span>{this.props.text} </span>
-        <p>{this.props.time} </p>
-        <p>{this.props.key}</p>
+        <p className="comment__p--time">{this.props.time} </p>
+        <p className="comment__p--key">{this.props.key}</p>
+        <span className="comment__span--text">{this.props.text} </span>
         {/* <span>{this.props.time} </span> */}
       </div>
     );

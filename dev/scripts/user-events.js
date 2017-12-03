@@ -6,7 +6,6 @@ import Login from './login.js'
 
 // pass event id & user id (email) to state of this component
 // that state will pass as props to a comment/haps/specific event page
-// disp
 
 // user logs in from login page
 // as soon as the user is logged in
@@ -29,7 +28,7 @@ export default class UserEvents extends React.Component {
       const user = this.props.currentUser.email.replace(/\./g, ',')
       firebase.database().ref(`users/${user}/events`).on('value', (snapshot) => {
         const firebaseEvents = snapshot.val();
-        
+
         const userEvents = [];
         for (let goingEvent in firebaseEvents) {
           userEvents.push(goingEvent)
@@ -41,9 +40,8 @@ export default class UserEvents extends React.Component {
     }
     render() {
       return (
-        <div>
+        <div className="userEvents__div">
           {/* User Event Tile goes here */}
-
         </div>
       )
     }

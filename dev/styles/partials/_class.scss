@@ -8,10 +8,10 @@
   text-shadow: none;
 }
 
-.comment {
+.comment__div {
   text-align: left;
 }
 
-.commentAuthor {
+.comment__head--author {
   color: darken($teal, 10%);
 }

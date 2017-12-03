@@ -9,11 +9,9 @@ export default class CommentBox extends React.Component {
     super();
     this.state = {
       comments: [],
-      
     }
   this.handleCommentSubmit = this.handleCommentSubmit.bind(this)
   }
-
 
   addComments(commentInfo) { // adding comments to database
     console.log(commentInfo)
@@ -57,7 +55,7 @@ export default class CommentBox extends React.Component {
         let now = new Date().toLocaleString('en-US', options);
         return now;
       }
-      //get user email from app component(to be passed down as props)
+      // get user email from app component(to be passed down as props)
       // const userLoggedIn = this.props.userEmail
       // console.log(userLoggedIn)
 
@@ -65,7 +63,7 @@ export default class CommentBox extends React.Component {
       console.log(DateTime)
 
 
-      
+
       var comments = this.state.comments;
       comment.id = Date.now();
       comment.time = DateTime;
@@ -82,24 +80,16 @@ export default class CommentBox extends React.Component {
 
   render(){
     return(
-      <div className="commentBox" >
-        <h1>Comments </h1>
+      <div className="commentBox__div" >
+        <h2 className="commentBox__head--comments">Comments</h2>
 
-        <CommentForm
-          onCommentSubmit={this.handleCommentSubmit}
-          submitForm={this.addComments}
-          user={this.props.userEmail}
+        <CommentForm onCommentSubmit={this.handleCommentSubmit} submitForm={this.addComments} user={this.props.userEmail}
           // userLoggedIn={userLoggedIn}
         />
 
-        <CommentList
-          comments={this.state.comments} 
-          />
-      
+        <CommentList comments={this.state.comments} />
+
       </div>
     );
   }
 }
-
-
-
