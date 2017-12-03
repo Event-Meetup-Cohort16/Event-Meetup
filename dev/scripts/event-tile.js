@@ -106,7 +106,13 @@ export default class EventTile extends React.Component {
 
           <p className="eventTile__p--ticketSales">{this.props.eventSalesStart} - {this.props.eventSalesEnd}</p>
 
-          <EventTileButton currentUser={this.props.currentUser} rsvp={this.checkRSVP()} currentPage={this.props.currentPage} eventID={this.props.eventID} />
+          <EventTileButton
+            currentUser={this.props.currentUser}
+            rsvp={this.checkRSVP()}
+            currentPage={this.props.currentPage}
+            eventID={this.props.eventID}
+            specificEvent={this.props.specificEvent}
+          />
 
           <InviteUser submitEmail={this.sendEmail} />
 

@@ -15,6 +15,7 @@ import Login from './login.js';
 import SearchEvents from './search-events.js';
 import SearchForm from './search-form.js'
 import UserEvents from './user-events.js';
+import SpecificEvent from './specific-event.js';
 
 
 var config = {
@@ -40,14 +41,14 @@ class App extends React.Component {
       currentPage: '',
       // state.searchResults will hold an array of event data objects, as returned by the api call, based on users search terms
       searchResults: [],
-      // state.userEvents will hold an array of the users saved event data objects, as returned by a call to the firebase database
-      userEvents: [],
+      // state.specificEventID will be used in the SpecificEvent component to render the event tile when the use wishes to go to the event's specific page
+      specificEventID: ''
     }
     this.currentUser = this.currentUser.bind(this);
     this.apiCall = this.apiCall.bind(this);
-    this.userEvents = this.userEvents.bind(this);
     this.updatePage = this.updatePage.bind(this);
     this.clearSearch = this.clearSearch.bind(this);
+    this.specificEvent = this.specificEvent.bind(this);
   }
 
   // This method will get passed down as a prop on the Login component, and will be used to update the user state on the main App component depending on if a user is logged in or not.
@@ -57,11 +58,9 @@ class App extends React.Component {
     })
   }
 
-  // This method will get passed down as a prop to the UserEvents component, and will be used to update the userEvents state to an array containing all the IDs for the events the user is attending
-  userEvents (array) {
-    this.setState({
-      userEvents: array
-    })
+  //
+  specificEvent (event) {
+    this.apiCall('', '', '', [event])
   }
 
   // This method accepts props from SearchForm and passes them into an api call, then returns event data to state.searchResults
@@ -110,7 +109,7 @@ class App extends React.Component {
           <div>
 
             {/* the Login component takes a "loggedIn" prop which will be used to conditionally render the login/logout links in login.js */}
-            <Login currentUser={this.currentUser} loggedIn={this.state.user.email} />
+            <Login currentUser={this.currentUser} loggedIn={this.state.user} />
 
             {/* A ternary which will render different components depending on if the user is logged in or not */}
             {this.state.user
@@ -124,15 +123,38 @@ class App extends React.Component {
                   this.clearSearch()
                   }}>Show my Events</Link></button>} />
 
-                <Route path="/home" render={props => <UserEvents currentUser={this.state.user} apiCall={this.apiCall} userEvents={this.userEvents} />} />
-                <Route path="/home" render={props => <SearchEvents currentUser={this.state.user} currentPage={this.state.currentPage} searchResults={this.state.searchResults} />} />
+                {/* Routing for the user events page */}
+                <Route path="/home" render={props => <UserEvents currentUser={this.state.user} apiCall={this.apiCall} />} />
+                <Route path="/home" render={props =>
+                  <SearchEvents
+                    currentUser={this.state.user}
+                    currentPage={this.state.currentPage}
+                    searchResults={this.state.searchResults}
+                    specificEvent={this.specificEvent}
+                  />}
+                />
 
-
+                {/* Routing for the search page */}
                 <Route path="/search" render={props => <SearchForm apiCall={this.apiCall} />} />
-                <Route path="/search" render={props => <SearchEvents currentUser={this.state.user} currentPage={this.state.currentPage} searchResults={this.state.searchResults} />} />
+                <Route path="/search" render={props =>
+                  <SearchEvents
+                    currentUser={this.state.user}
+                    currentPage={this.state.currentPage}
+                    searchResults={this.state.searchResults}
+                    specificEvent={this.specificEvent}
+                  />}
+                />
 
-                <Route path="/event" component={EventTile} />
-
+                {/* Routing for the page which renders the specific event the user is viewing */}
+                <Route path="/event/:event" render={props => <SpecificEvent apiCall={this.apiCall} eventID={this.state.specificEventID} />} />
+                <Route path="/event/:event" render={props => 
+                  <SearchEvents
+                    currentUser={this.state.user}
+                    currentPage={this.state.currentPage}
+                    searchResults={this.state.searchResults}
+                    specificEvent={this.specificEvent}
+                  />}
+                />
                 <Footer clearSearch={this.clearSearch} apiCall={this.apiCall} updatePage={this.updatePage} />
             </div>
 

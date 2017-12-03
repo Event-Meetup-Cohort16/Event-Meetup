@@ -43,19 +43,20 @@ export default class EventTileButton extends React.Component {
     refInvited.set(false)
   }
 
-   leaveEvent(e) {
+  leaveEvent(e) {
     // method for leaving event goes in here
     e.preventDefault()
     const user = this.props.currentUser.email.replace(/\./g, ',')
     const ref = firebase.database().ref(`users/${user}/events/${this.props.eventID}`).remove()
   }
 
+  // This method will determine whether the Link component will actually send the user to the "to" path or not. The Link should only work when the user is going to see a specific event page, otherwise prevent the default action of the Link component.
   linkAction() {
-    let linkAction = '';
+    let action = () => {};
     if (this.props.rsvp === 'invited' || this.props.currentPage === 'event') {
-      linkAction = e => e.preventDefault()
+      action = e => e.preventDefault()
     }
-    return linkAction;
+    return action;
   }
 
   buttonAction() {
@@ -71,19 +72,15 @@ export default class EventTileButton extends React.Component {
   button() {
     if (this.props.rsvp === 'going') {
       return (
-        <div>
-          <button>Event Page</button>
-         
-        </div>
-      
-    )
+        <button onClick={() => this.props.specificEvent(this.props.eventID)}>Event Page</button>
+      )
     } else if (this.props.rsvp === 'invited') {
       return (
         <div>
           <button onClick={this.acceptInvite}>Accept Invite</button>
           <button onClick={this.leaveEvent}>Decline Invite</button> 
         </div>
-    )
+      )
     } else if (this.props.rsvp === 'neither') {
       return (
         <button onClick={this.addEvent}>Add Event</button>
@@ -96,10 +93,7 @@ export default class EventTileButton extends React.Component {
 
       <Link
         onClick={this.linkAction}
-        
-        to={'/'}>
-
-        {/* Route which determines how the button will appear on the search page */}
+        to={`/event/${this.props.eventID}`}>
 
         {this.button()}
         
