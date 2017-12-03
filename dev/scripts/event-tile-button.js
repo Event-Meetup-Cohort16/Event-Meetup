@@ -12,6 +12,8 @@ export default class EventTileButton extends React.Component {
   constructor(props) {
     super(props);
     this.addEvent = this.addEvent.bind(this)
+    this.leaveEvent = this.leaveEvent.bind(this)
+    this.acceptInvite = this.acceptInvite.bind(this)
     this.linkAction = this.linkAction.bind(this)
     this.buttonAction = this.buttonAction.bind(this)
     this.button = this.button.bind(this)
@@ -31,16 +33,21 @@ export default class EventTileButton extends React.Component {
     })
   }
 
-  acceptInvite() {
+  acceptInvite(e) {
     // method for accepting invite goes in here
+    e.preventDefault()
+    const user = this.props.currentUser.email.replace(/\./g, ',')
+    const refGoing = firebase.database().ref(`users/${user}/events/${this.props.eventID}/going`);
+    refGoing.set(true)
+    const refInvited = firebase.database().ref(`users/${user}/events/${this.props.eventID}/invited`);
+    refInvited.set(false)
   }
 
-  declineInvite() {
-    // method for declining invite goes in here
-  }
-
-  leaveEvent() {
+   leaveEvent(e) {
     // method for leaving event goes in here
+    e.preventDefault()
+    const user = this.props.currentUser.email.replace(/\./g, ',')
+    const ref = firebase.database().ref(`users/${user}/events/${this.props.eventID}`).remove()
   }
 
   linkAction() {
@@ -64,13 +71,17 @@ export default class EventTileButton extends React.Component {
   button() {
     if (this.props.rsvp === 'going') {
       return (
-      <button>Event Page</button>
+        <div>
+          <button>Event Page</button>
+         
+        </div>
+      
     )
     } else if (this.props.rsvp === 'invited') {
       return (
         <div>
-          <button>Accept Invite</button>
-          <button>Decline Invite</button>
+          <button onClick={this.acceptInvite}>Accept Invite</button>
+          <button onClick={this.leaveEvent}>Decline Invite</button> 
         </div>
     )
     } else if (this.props.rsvp === 'neither') {
