@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-
 import {
     BrowserRouter as Router,
     Route,
     Link,
     NavLink
 } from 'react-router-dom';
+
+import Header from './header.js';
 
 const provider = new firebase.auth.GoogleAuthProvider()
 
@@ -89,6 +90,7 @@ export default class Login extends React.Component {
     render () {
         return (
             <div className="login__div">
+                <Header />
                 {this.props.loggedIn
                 ?
                 <a className="login__a--login" href="" onClick={this.logout}><Link to="/">Logout</Link></a>

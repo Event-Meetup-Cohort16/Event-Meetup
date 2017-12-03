@@ -1,56 +1,17 @@
 // Colors
+$khaki: #bba274;
+$orange: #f2a260;
 $red: #ba4c53;
 $teal: #5d8e7d;
-$orange: #f2a260;
-$khaki: #bba274;
 
 // Type
 $headingFont: 'Roboto', sans-serif;
 $bodyFont: 'Open Sans', sans-serif;
 
-// Fluid Type Sizing
-$headingSize1: calc(2rem + (7.5 - 2) * ((100vw - 300px) / (1600 - 300)));
+$headingSize1: calc(5.6rem + (40 - 5.6) * ((100vw - 300px) / (1600 - 300)));
 $headingSize2: calc(1.8rem + (2.7 - 1.8) * ((100vw - 300px) / (1600 - 300)));
 $headingSize3: calc(1.6rem + (2 - 1.6) * ((100vw - 300px) / (1600 - 300)));
 $bodySize: calc(1.6rem + (2 - 1.6) * ((100vw - 300px) / (1600 - 300)));
-
-html {
-  font-size: 62.5%; // 10px
-  letter-spacing: 0.09rem;
-  line-height: 1.5;
-}
-
-body {
-  background: $khaki;
-}
-
-.wrapper {
-  background: rgba(255,255,255,0.2);
-  border-radius: 5px;
-  margin: 1rem auto;
-  max-width: 1600px;
-  min-width: 300px;
-  padding: 1rem;
-  text-align: center;
-  width: 95vw;
-}
-
-a, button, input, p, select, span, textarea {
-  font-family: $bodyFont;
-  font-size: $bodySize;
-  margin: 1rem;
-  padding: 1rem;
-}
-
-a {
-  color: $red;
-  display: inline-block;
-  font-weight: bold;
-  text-decoration: none;
-}
-a:focus, a:hover {
-  text-shadow: 1px 1px 0 $orange, 1px -1px 0 $orange, -1px -1px 0 $orange, -1px 1px 0 $orange;
-}
 
 h1, h2, h3 {
   font-family: $headingFont;
@@ -65,23 +26,42 @@ h3 {
   font-size: $headingSize3;
 }
 
-button {
-  background: $orange;
-  border: none;
-  color: darken($red, 10%);
-  font-weight: bold;
-  text-shadow: 0 1px 0 $teal;
-  text-transform: uppercase;
-}
-button:focus, button:hover {
-  background: darken($orange, 10%);
-  color: darken($red, 20%);
-  text-shadow: 0 1px 0 darken($teal, 20%);
+a, button, input, p, select, span, textarea {
+  font-family: $bodyFont;
+  font-size: $bodySize;
 }
 
-button, input, select, textarea {
-  border: 1px solid $red;
+// Layout
+html {
+  font-size: 62.5%; // 10px
+  letter-spacing: 0.09rem;
+  line-height: 1.5;
+}
+
+body {
+  background: $khaki;
+}
+
+.wrapper {
+  // background: rgba(255,255,255,0.2);
+  background: rgba(0,0,0,0.2);
   border-radius: 5px;
+  margin: 1rem auto;
+  max-width: 1600px;
+  min-height: 95vh;
+  min-width: 300px;
+  padding: 1rem;
+  text-align: center;
+  width: 95vw;
+}
+
+button {
+  border: none;
+}
+
+img {
+  margin: 0 auto;
+  max-width: 90vw;
 }
 
 input, select, textarea {
@@ -90,15 +70,13 @@ input, select, textarea {
 
 textarea {
   resize: none;
-}
-
-img {
-  display: block;
-  margin: 0 auto;
-  max-width: 95vw;
+  width: 90vw;
 }
 
 ul {
   list-style: inside none;
   padding-left: 0;
+  li {
+    display: inline-block;
+  }
 }
