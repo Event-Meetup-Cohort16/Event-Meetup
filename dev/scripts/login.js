@@ -69,13 +69,13 @@ export default class Login extends React.Component {
 
     render () {
         return (
-            <div>
+            <div className="login__div">
                 {this.props.loggedIn
-                ? 
-                <a href="" onClick={this.logout}><Link to="/">Logout</Link></a>
+                ?
+                <a className="login__a--login" href="" onClick={this.logout}><Link to="/">Logout</Link></a>
                 :
-                <a href="" 
-                onClick={this.login} 
+                <a className="login__a--logout" href=""
+                onClick={this.login}
                 // onClick={this.addRef}
                 >Login with Google</a>
                 }

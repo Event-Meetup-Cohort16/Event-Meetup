@@ -24,14 +24,18 @@ class Footer extends React.Component {
         // This loads the most previous page based on browser history
         window.history.back();
     }
-    
+
     render(){
         return(
-            <ul>
-                <li>
+            <ul className="footer__ul">
+                <li className="footer__li--link">
                     <NavLink to="/home" onClick={() => this.props.updatePage('home')}>My Events</NavLink>
+                </li>
+                <li className="footer__li--link">
                     <NavLink to="/search" onClick={() => this.props.updatePage('search')}>Search</NavLink>
-                    <a href="#" onClick={this.goBack}>Back</a>
+                </li>
+                <li className="footer__li--link">
+                    <a className="footer__a--back" href="#" onClick={this.goBack}>Back</a>
                 </li>
             </ul>
         )

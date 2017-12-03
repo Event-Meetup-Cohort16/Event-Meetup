@@ -92,19 +92,19 @@ export default class EventTile extends React.Component {
 
     render() {
       return (
-        <div>
-          <h2>{this.props.eventName}</h2>
+        <div className="eventTile__div">
+          <h2 className="eventTile__head--eventName">{this.props.eventName}</h2>
 
-          <img src={`${this.props.eventImageURL}`} alt={`Promo image for ${this.props.eventName}`} />
-          <a href={`${this.props.eventURL}`}>See event on Ticketmaster</a>
+          <img className="eventTile__img--eventImg"src={`${this.props.eventImgURL}`} alt={`Promo image for ${this.props.eventName}`} />
+          <a className="eventTile__a--eventURL"href={`${this.props.eventURL}`}>See event on Ticketmaster</a>
 
-          <p>{this.props.eventType}, {this.props.eventGenre}, {this.props.eventSubGenre}</p>
+          <p className="eventTile__p--eventTags">{this.props.eventType}, {this.props.eventGenre}, {this.props.eventSubGenre}</p>
 
-          <p>{this.props.eventDate}, {this.props.eventTime} {this.props.venue}, {this.props.address}</p>
+          <p className="eventTile__p--eventDeets">{this.props.eventDate}, {this.props.eventTime} {this.props.venue}, {this.props.address}</p>
 
-          <h3>Tickets on Sale!</h3>
+          <h3 className="eventTile__head--tickets">Tickets on Sale!</h3>
 
-          <p>{this.props.eventSalesStart} - {this.props.eventSalesEnd}</p>
+          <p className="eventTile__p--ticketSales">{this.props.eventSalesStart} - {this.props.eventSalesEnd}</p>
 
           <EventTileButton currentUser={this.props.currentUser} rsvp={this.checkRSVP()} currentPage={this.props.currentPage} eventID={this.props.eventID} />
 
