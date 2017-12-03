@@ -61,7 +61,7 @@ export default class Login extends React.Component {
         firebase.auth().signOut()
             .then(() => {
                 // When the user logs out, set the user state on app.js to an empty string
-                this.props.currentUser('')
+                this.props.currentUser()
             })
     }
 
@@ -81,7 +81,7 @@ export default class Login extends React.Component {
                 })
             } else {
                 // If not logged in, set the user state on app.js to an empty string
-                this.props.currentUser('')
+                this.props.currentUser()
             }
         })
     }
