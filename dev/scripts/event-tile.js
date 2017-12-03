@@ -42,6 +42,7 @@ export default class EventTile extends React.Component {
       let exists = snapshot.val();
 
       if (exists !== null) {
+        console.log(this.props.currentUser)
         const host = this.props.currentUser.email.replace(/\./g, ',');
         let ref = firebase.database().ref(`users/${toEmail}/events/${this.props.eventID}`);
 
@@ -121,16 +122,16 @@ export default class EventTile extends React.Component {
             specificEvent={this.props.specificEvent}
           />
 
-          <EventTileButton currentUser={this.props.currentUser} rsvp={this.checkRSVP()} currentPage={this.props.currentPage} eventID={this.props.eventID} />
-{/*
           <InviteUser submitEmail={this.sendEmail} />
 
           <CommentBox userEmail={this.props.currentUser.email} /> */}
 
           {/* When landing on specific event page -- load 1. Comment Box 2. Invite User */}
-          <Route path="/event/specificEvent"
+
+          <Route path="/event/:event" 
+
             render={props => <CommentBox userEmail={this.props.currentUser.email} />} />
-          <Route path="/event/specificEvent"
+          <Route path="/event/:event"
             render={props => <InviteUser submitEmail={this.sendEmail} />} />
 
           </div>
