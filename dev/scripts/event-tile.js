@@ -4,6 +4,12 @@ import CommentForm from './comment-form.js'
 import CommentBox from './comment-box.js'
 import InviteUser from './invite-user.js'
 import EventTileButton from './event-tile-button.js'
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  NavLink
+} from 'react-router-dom';
 
 // This component displays event info as returned by apiCall
 export default class EventTile extends React.Component {
@@ -92,6 +98,7 @@ export default class EventTile extends React.Component {
 
     render() {
       return (
+      
         <div className="eventTile__div">
           <h2 className="eventTile__head--eventName">{this.props.eventName}</h2>
 
@@ -105,15 +112,21 @@ export default class EventTile extends React.Component {
           <h3 className="eventTile__head--tickets">Tickets on Sale!</h3>
 
           <p className="eventTile__p--ticketSales">{this.props.eventSalesStart} - {this.props.eventSalesEnd}</p>
-
+          
           <EventTileButton currentUser={this.props.currentUser} rsvp={this.checkRSVP()} currentPage={this.props.currentPage} eventID={this.props.eventID} />
-
+{/* 
           <InviteUser submitEmail={this.sendEmail} />
 
-          <CommentBox userEmail={this.props.currentUser.email} />
+          <CommentBox userEmail={this.props.currentUser.email} /> */}
 
+          {/* When landing on specific event page -- load 1. Comment Box 2. Invite User */}
+          <Route path="/event/specificEvent" 
+            render={props => <CommentBox userEmail={this.props.currentUser.email} />} />
+          <Route path="/event/specificEvent"
+            render={props => <InviteUser submitEmail={this.sendEmail} />} />
+          
           </div>
-
+      
       )
     }
 }
