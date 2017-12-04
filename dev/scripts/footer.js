@@ -61,7 +61,7 @@ export default class Footer extends React.Component {
                         </NavLink>
                     </li>
                     <li className="footer__li--link">
-                        <a className="login__a--logout" href="" onClick={this.logout}><Link to="/">Logout</Link></a>
+                        <Link to="/" onClick={this.logout}>Logout</Link>
                     </li>
                 </ul>
             </div>

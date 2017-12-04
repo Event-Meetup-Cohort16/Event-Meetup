@@ -98,6 +98,26 @@ export default class EventTile extends React.Component {
   }
 
     render() {
+
+      let ticketSalesDates = `${this.props.eventSalesStart} - ${this.props.eventSalesEnd}`
+      ticketSalesDates = ticketSalesDates
+        // Replace dashes in date with slashes
+        .replace(/\-/g, '/')
+        // Replace the T and Z which appear before/after the timestamps with empty spaces
+        .replace(/\T/g, ' ')
+        .replace(/\Z/g, ' ')
+        // Remove the specific sales times for tickets, while leaving the dates
+        .replace(/[0-9]{2}:[0-9]{2}:[0-9]{2}/g, '')
+        // Clean up the remaining characters that exist between the two dates
+        .replace(/   \//g, ' —')
+
+      let eventDateTime = `${this.props.eventDate}, ${this.props.eventTime}`
+      eventDateTime = eventDateTime
+        // Replace dashes in event date with slashes
+        .replace(/\-/g, '/')
+        // Get rid of the seconds indicator in the event time
+        .replace(/:[0-9]{2}$/g, '')
+
       return (
 
         <div className="eventTile__div">
@@ -108,11 +128,15 @@ export default class EventTile extends React.Component {
 
           <p className="eventTile__p--eventTags">{this.props.eventType}, {this.props.eventGenre}, {this.props.eventSubGenre}</p>
 
-          <p className="eventTile__p--eventDeets">{this.props.eventDate}, {this.props.eventTime} {this.props.venue}, {this.props.address}</p>
+          <p className="eventTile__p--eventDeets">
+          {eventDateTime}<br />
+          {this.props.venue}<br />
+          {this.props.address}
+          </p>
 
           <h3 className="eventTile__head--tickets">Tickets on Sale!</h3>
 
-          <p className="eventTile__p--ticketSales">{this.props.eventSalesStart} - {this.props.eventSalesEnd}</p>
+          <p className="eventTile__p--ticketSales">{ticketSalesDates}</p>
 
           <EventTileButton
             apiCall={this.props.apiCall}
