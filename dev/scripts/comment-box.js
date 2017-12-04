@@ -19,20 +19,20 @@ export default class CommentBox extends React.Component {
  // Displaying comments already stored in database
   componentDidMount() { 
     // We start by searching through the users database for the current event and retrieving the host information
-    const user = this.props.userEmail.replace(/\./g, ',')
+    var user = this.props.userEmail.replace(/\./g, ',')
     var eventID = this.props.searchResults[0].id// ****TO UPDATE WITH SPECIFIC EVENT ID
     // var eventID = this.props.eventID// ****TO UPDATE WITH SPECIFIC EVENT ID
     //1AvZZfsGkDdm6ES --> hardcoded cars
     //1AvZZfsGkDdm6ES --> hardcoded cars
     console.log(eventID) // ***TO UPDATE WITH SPECIFIC EVENTID
-    const rootRef = firebase.database().ref(`users/${user}/events/${eventID}/host`)
+    var rootRef = firebase.database().ref(`users/${user}/events/${this.props.searchResults[0].id}/host`)
     rootRef.on('value', (snapshot) => {
         console.log(snapshot.val())
-        const host = snapshot.val()
+        var host = snapshot.val()
       
       
       // Once we have the host information, we store all the comments regarding the specific event page in that HOST's node (this is because the host is the original person who created the event page)
-      const userRef = firebase.database().ref(`users/${host}/events/${eventID}/comments`);
+      const userRef = firebase.database().ref(`users/${host}/events/${this.props.searchResults[0].id}/comments`);
         userRef.on('value', (snapshot) => {
           const firebaseData = snapshot.val()
           const commentData = []
@@ -47,7 +47,7 @@ export default class CommentBox extends React.Component {
             host : host
           })
           this.setState({
-            eventID : eventID
+            eventID: this.props.searchResults[0].id
           })
 
         }) // closing userRef
@@ -67,7 +67,7 @@ export default class CommentBox extends React.Component {
 
   handleCommentSubmit(comment) {
       console.log(this.props.userEmail)
-      console.log(this.props.eventID)
+    console.log(this.props.searchResults[0].id)
       // On submit of the Comment-Form, we create a timestamp.
       const timeStamp = () => {
         let options = {
@@ -104,7 +104,7 @@ export default class CommentBox extends React.Component {
         user={this.props.userEmail}
         // Host & EventID stored as state, passed down as props to Comment-Form to be used in the addComments method
         host={this.state.host}
-        eventID={this.state.eventID}
+        eventID={this.props.searchResults[0].id}
         />
         <CommentList comments={this.state.comments} />
 
