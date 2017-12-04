@@ -4,10 +4,12 @@ import Comment from "./comment"
 
 
 export default class CommentList extends React.Component {
-
+  constructor(props) {
+    super(props);
+  }
   render() {
 
-    var commentNodes = this.props.comments.map( (comment) => {
+    const commentNodes = this.props.comments.map( (comment) => {
       return (
         <Comment text={comment.text} author={comment.author} key={comment.id} time={comment.time} />
       );
