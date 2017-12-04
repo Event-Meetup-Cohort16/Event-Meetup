@@ -43,12 +43,14 @@ export default class CommentForm extends React.Component {
     var DateTime = timeStamp()
 
     console.log(this.props.user)
-
+    console.log(this.props.host)
 
     var commentInfo = {
       author: this.props.user, //the author is determined by whoever is signed in
       text: text,
-      time: DateTime
+      time: DateTime,
+      host: this.props.host, // passed down from comment box
+      event: this.props.eventID // passed down from comment box
     }
 
     //refer to comment-box for commentInfo on submit
