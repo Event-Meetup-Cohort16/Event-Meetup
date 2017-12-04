@@ -115,15 +115,19 @@ export default class EventTile extends React.Component {
           <p className="eventTile__p--ticketSales">{this.props.eventSalesStart} - {this.props.eventSalesEnd}</p>
 
           <EventTileButton
+            apiCall={this.props.apiCall}
             currentUser={this.props.currentUser}
             rsvp={this.checkRSVP()}
             currentPage={this.props.currentPage}
             updatePage={this.props.updatePage}
             eventID={this.props.eventID}
             specificEvent={this.props.specificEvent}
+            clearSearch={this.props.clearSearch}
           />
 
-          {/* When landing on specific event page -- load 1. Comment Box 2. Invite User */}
+          {/* When landing on specific event page -- load 1. Invite User 2. Comment Box */}
+          <Route path="/event/:event"
+            render={props => <InviteUser submitEmail={this.sendEmail} />} />
 
           <Route path="/event/:event"
             render={props => <CommentBox 
@@ -131,9 +135,7 @@ export default class EventTile extends React.Component {
             searchResults={this.props.searchResults}
             userEmail={this.props.currentUser.email} />} />
 
-          <Route path="/event/:event"
-            render={props => <InviteUser submitEmail={this.sendEmail} />} />
-      </div>
+        </div>
       )
     }
 }

@@ -5,14 +5,16 @@ import {
   BrowserRouter as Router,
   Route,
   Link,
-  NavLink
+  NavLink,
+  withRouter
 } from 'react-router-dom';
 
-let link;
-
-export default class EventTileButton extends React.Component {
+export default withRouter(class EventTileButton extends React.Component {
   constructor(props) {
     super(props);
+    this.state = {
+      link: '/home'
+    }
     this.addEvent = this.addEvent.bind(this)
     this.leaveEvent = this.leaveEvent.bind(this)
     this.acceptInvite = this.acceptInvite.bind(this)
@@ -50,6 +52,22 @@ export default class EventTileButton extends React.Component {
     const user = this.props.currentUser.email.replace(/\./g, ',')
     const ref = firebase.database().ref(`users/${user}/events/`)
     ref.child(`${this.props.eventID}`).remove()
+
+    this.props.clearSearch()
+
+    firebase.database().ref(`users/${user}/events`).once('value', (snapshot) => {
+      const firebaseEvents = snapshot.val();
+
+      const userEvents = [];
+      for (let goingEvent in firebaseEvents) {
+        userEvents.push(goingEvent)
+      }
+
+      this.props.apiCall('', '', '', userEvents)
+
+    })
+
+
   }
 
   // This method will determine whether the Link component will actually send the user to the "to" path or not. The Link should only work when the user is going to see a specific event page, otherwise prevent the default action of the Link component.
@@ -60,15 +78,20 @@ export default class EventTileButton extends React.Component {
     } else if (this.props.currentPage === 'home') {
       action = () => this.props.updatePage('event')
     } else if (this.props.currentPage === 'event') {
-      action = () => this.props.updatePage('home')
+      action = () => {
+        this.props.history.push('/home');
+        this.props.updatePage('home');
+      }
     }
     return action;
   }
 
+  // This method will conditionally render different <button> elements depending on where the user is on the website and the conditions of the event tile (whether the user is invited, going, or neither, etc)
   button() {
     if (this.props.rsvp === 'going' && (this.props.currentPage === 'home' || this.props.currentPage === 'search')) {
       return (
         <button onClick={() => {
+          this.props.clearSearch()
           this.props.specificEvent(this.props.eventID)
           this.props.updatePage('event')
         }}>Event Page</button>
@@ -91,13 +114,22 @@ export default class EventTileButton extends React.Component {
     }
   }
 
+  componentDidMount() {
+    if (this.props.currentPage !== 'event') {
+      this.setState({
+        link: `/event/${this.props.eventID}`
+      })
+    }
+  }
+
   render() {
+    console.log(this.state.link)
     return (
       <Link
         onClick={this.linkAction()}
-        to={`/event/${this.props.eventID}`}>
+        to={`${this.state.link}`}>
         {this.button()}
       </Link>
     )
   }
-}
+})

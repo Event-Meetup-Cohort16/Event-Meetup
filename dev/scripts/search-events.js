@@ -12,11 +12,15 @@ export default class SearchEvents extends React.Component {
 
   render() {
     return (
-      <div className="searchEvents__div">
+      <div className="searchEvents__div clearfix">
         {/* Map over the array with our search results, and return one EventTile component per result. Pass in the data needed as props */}
         {this.props.searchResults.map((result) => {
           return (
             <EventTile
+              apiCall={this.props.apiCall}
+              // A method we will call to clear the searchResults array on app.js before making a new api call
+              clearSearch={this.props.clearSearch}
+              // A method that will make an api call when going to the specific event page
               searchResults={this.props.searchResults}
               specificEvent={this.props.specificEvent}
               // The page the current user is on
