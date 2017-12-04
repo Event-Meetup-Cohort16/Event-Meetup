@@ -1,0 +1,17 @@
+.eventTile__div {
+  float: left;
+  padding: 10px;
+  width: 33.33%;
+}
+
+@media (max-width: 920px) {
+  .eventTile__div {
+    width: 50%;
+  }
+}
+
+@media (max-width: 620px) {
+  .eventTile__div {
+    width: 100%;
+  }
+}

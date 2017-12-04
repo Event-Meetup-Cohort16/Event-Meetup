@@ -134,8 +134,10 @@ class App extends React.Component {
                 updatePage={this.updatePage}
                 searchResults={this.state.searchResults}
                 specificEvent={this.specificEvent}
+                clearSearch={this.clearSearch}
+                apiCall={this.apiCall}
               />
-              <Footer clearSearch={this.clearSearch} apiCall={this.apiCall} updatePage={this.updatePage} />
+              <Footer clearSearch={this.clearSearch} currentUser={this.currentUser} updatePage={this.updatePage} currentPage={this.state.currentPage} />
           
           </div>
           :
