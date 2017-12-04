@@ -17,6 +17,7 @@ export default class SearchEvents extends React.Component {
         {this.props.searchResults.map((result) => {
           return (
             <EventTile
+              searchResults={this.props.searchResults}
               specificEvent={this.props.specificEvent}
               // The page the current user is on
               currentPage={this.props.currentPage}
