@@ -128,11 +128,12 @@ export default class EventTile extends React.Component {
           <Route path="/event/:event"
             render={props => <CommentBox 
             eventID={this.props.eventID}
+            searchResults={this.props.searchResults}
             userEmail={this.props.currentUser.email} />} />
 
           <Route path="/event/:event"
             render={props => <InviteUser submitEmail={this.sendEmail} />} />
-
+      </div>
       )
     }
 }
