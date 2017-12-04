@@ -62,21 +62,15 @@ export default class CommentBox extends React.Component {
       var DateTime = timeStamp()
       console.log(DateTime)
 
-
-
       var comments = this.state.comments;
       comment.id = Date.now();
       comment.time = DateTime;
       // comment.author = this.props.userEmail; // Sets the commentbox author to whoever is logged in
 
-
       var newComments = comments.concat([comment]);
       this.setState({comments: newComments});
       console.log(this.state)
-
   }
-
-
 
   render(){
     return(
@@ -86,7 +80,6 @@ export default class CommentBox extends React.Component {
         <CommentForm onCommentSubmit={this.handleCommentSubmit} submitForm={this.addComments} user={this.props.userEmail}
           // userLoggedIn={userLoggedIn}
         />
-
         <CommentList comments={this.state.comments} />
 
       </div>

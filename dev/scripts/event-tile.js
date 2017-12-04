@@ -118,22 +118,16 @@ export default class EventTile extends React.Component {
             currentUser={this.props.currentUser}
             rsvp={this.checkRSVP()}
             currentPage={this.props.currentPage}
+            updatePage={this.props.updatePage}
             eventID={this.props.eventID}
             specificEvent={this.props.specificEvent}
           />
 
-          <InviteUser submitEmail={this.sendEmail} />
-
-          <CommentBox userEmail={this.props.currentUser.email} /> */}
-
-          {/* When landing on specific event page -- load 1. Comment Box 2. Invite User */}
-
-          <Route path="/event/:event" 
-
-            render={props => <CommentBox userEmail={this.props.currentUser.email} />} />
+          {/* When landing on specific event page -- load 1. Invite User 2. Comment Box */}
           <Route path="/event/:event"
             render={props => <InviteUser submitEmail={this.sendEmail} />} />
-
+          <Route path="/event/:event"
+            render={props => <CommentBox userEmail={this.props.currentUser.email} />} />
           </div>
 
       )
