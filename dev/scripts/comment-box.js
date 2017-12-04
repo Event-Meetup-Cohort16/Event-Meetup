@@ -81,6 +81,13 @@ export default class CommentBox extends React.Component {
         return now;
       }
       var DateTime = timeStamp()
+      console.log(DateTime)
+
+      var comments = this.state.comments;
+      comment.id = Date.now();
+      comment.time = DateTime;
+      // comment.author = this.props.userEmail; // Sets the commentbox author to whoever is logged in
+
       var comments = this.state.comments;
       comment.id = Date.now();
       comment.time = DateTime;
@@ -89,10 +96,7 @@ export default class CommentBox extends React.Component {
       var newComments = comments.concat([comment]);
       this.setState({comments: newComments});
       console.log(this.state)
-
   }
-
-
 
   render(){
     return(

@@ -20,6 +20,8 @@ export default class SearchEvents extends React.Component {
               specificEvent={this.props.specificEvent}
               // The page the current user is on
               currentPage={this.props.currentPage}
+              // A method that will be used to update the currentPage state
+              updatePage={this.props.updatePage}
               // The email of the current user; will be used to push information to Firebase
               currentUser={this.props.currentUser}
               // The name of the event

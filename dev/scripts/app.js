@@ -17,7 +17,6 @@ import SearchForm from './search-form.js';
 import UserEvents from './user-events.js';
 import SpecificEvent from './specific-event.js';
 
-
 var config = {
   apiKey: "AIzaSyDd8y8IyT-l37rZ1mZjqvrVLTUIICKMMlY",
   authDomain: "what-s-the-haps.firebaseapp.com",
@@ -31,7 +30,6 @@ firebase.initializeApp(config);
 const apiURL =  `https://app.ticketmaster.com/discovery/v2/events.json?apikey=uuTnaGAVvta7ICBgb68XcI2AHioUcEKT`;
 
 class App extends React.Component {
-
   constructor() {
     super()
     this.state = {
@@ -81,12 +79,10 @@ class App extends React.Component {
     } else {
       queries = `&keyword=${keyword}&city=${userCity}&countryCode=CA`
     }
-
     axios.get(`${apiURL}${queries}`).then((res)=> {
       const searchResults = res.data._embedded.events;
       this.setState({searchResults});
     })
-
   }
 
   // Used to update the currentPage state. Useful for conditional rendering where it does not make sense to use Routing
@@ -103,70 +99,51 @@ class App extends React.Component {
     })
   }
 
-    render() {
-      return (
-        <Router>
+  render() {
+    return (
+      <Router>
+        <div>
+
+          {/* the Login component takes a "loggedIn" prop which will be used to conditionally render the login/logout links in login.js */}
+          <Login currentUser={this.currentUser} loggedIn={this.state.user} />
+
+          {/* A ternary which will render different components depending on if the user is logged in or not */}
+          {this.state.user
+          ?
           <div>
+              <Route exact path="/" render={props => <button>
+                <Link to="/home"
+                onClick={() => {
+                this.updatePage('home')
+                this.clearSearch()
+                }}>Show my Events</Link></button>} />
 
-            {/* the Login component takes a "loggedIn" prop which will be used to conditionally render the login/logout links in login.js */}
-            <Login currentUser={this.currentUser} loggedIn={this.state.user} />
+              {/* Routing for the user events page */}
+              <Route path="/home" render={props => <UserEvents currentUser={this.state.user} apiCall={this.apiCall} />} />
 
-            {/* A ternary which will render different components depending on if the user is logged in or not */}
-            {this.state.user
-            ?
+              {/* Routing for the search page */}
+              <Route path="/search" render={props => <SearchForm apiCall={this.apiCall} />} />
 
-            <div>
-                <Route exact path="/" render={props => <button>
-                  <Link to="/home"
-                  onClick={() => {
-                  this.updatePage('home')
-                  this.clearSearch()
-                  }}>Show my Events</Link></button>} />
+              {/* Routing for the page which renders the specific event the user is viewing */}
+              <Route path="/event/:event" render={props => <SpecificEvent apiCall={this.apiCall} eventID={this.state.specificEventID} />} />
 
-                {/* Routing for the user events page */}
-                <Route path="/home" render={props => <UserEvents currentUser={this.state.user} apiCall={this.apiCall} />} />
-                <Route path="/home" render={props =>
-                  <SearchEvents
-                    currentUser={this.state.user}
-                    currentPage={this.state.currentPage}
-                    searchResults={this.state.searchResults}
-                    specificEvent={this.specificEvent}
-                  />}
-                />
-
-                {/* Routing for the search page */}
-                <Route path="/search" render={props => <SearchForm apiCall={this.apiCall} />} />
-
-                <Route path="/search" render={props =>
-                  <SearchEvents
-                    currentUser={this.state.user}
-                    currentPage={this.state.currentPage}
-                    searchResults={this.state.searchResults}
-                    specificEvent={this.specificEvent}
-                  />}
-                />
-
-                {/* Routing for the page which renders the specific event the user is viewing */}
-                <Route path="/event/:event" render={props => <SpecificEvent apiCall={this.apiCall} eventID={this.state.specificEventID} />} />
-                <Route path="/event/:event" render={props => 
-                  <SearchEvents
-                    currentUser={this.state.user}
-                    currentPage={this.state.currentPage}
-                    searchResults={this.state.searchResults}
-                    specificEvent={this.specificEvent}
-                  />}
-                />
-
-                <Footer clearSearch={this.clearSearch} apiCall={this.apiCall} updatePage={this.updatePage} />
+              {/* SearchEvents will populate the page with the results from the API call */}
+              <SearchEvents
+                currentUser={this.state.user}
+                currentPage={this.state.currentPage}
+                updatePage={this.updatePage}
+                searchResults={this.state.searchResults}
+                specificEvent={this.specificEvent}
+              />
+              <Footer clearSearch={this.clearSearch} apiCall={this.apiCall} updatePage={this.updatePage} />
           
-            </div>
-
-            :
-            ''
-            }
           </div>
-        </Router>
-      )
+          :
+          ''
+          }
+        </div>
+      </Router>
+    )
     }
 }
 
