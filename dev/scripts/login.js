@@ -16,7 +16,6 @@ export default class Login extends React.Component {
     constructor(props) {
         super(props);
         this.login = this.login.bind(this)
-        this.logout = this.logout.bind(this)
         // this.addRef = this.addRef.bind(this)
     }
 
@@ -56,16 +55,6 @@ export default class Login extends React.Component {
             })
     }
 
-    // Logout Method
-    logout(e) {
-        e.preventDefault();
-        firebase.auth().signOut()
-            .then(() => {
-                // When the user logs out, set the user state on app.js to an empty string
-                this.props.currentUser()
-            })
-    }
-
     // addRef(){ //when user logs in then add a reference
     //     const user = this.props.currentUser.email.replace(/\./g, ',')
     //     const dbRef = firebase.database().ref(`users/${user}`)
@@ -93,7 +82,7 @@ export default class Login extends React.Component {
                 <Header />
                 {this.props.loggedIn
                 ?
-                <a className="login__a--login" href="" onClick={this.logout}><Link to="/">Logout</Link></a>
+                ''
                 :
                 <a className="login__a--logout" href=""
                 onClick={this.login}

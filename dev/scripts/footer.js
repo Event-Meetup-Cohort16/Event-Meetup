@@ -14,6 +14,7 @@ export default class Footer extends React.Component {
     constructor() {
         super();
         this.goBack = this.goBack.bind(this)
+        this.logout = this.logout.bind(this)
     }
 
     goBack(e) {
@@ -25,26 +26,42 @@ export default class Footer extends React.Component {
         window.history.back();
     }
 
+    // Logout Method
+    logout(e) {
+        e.preventDefault();
+        this.props.clearSearch()
+        firebase.auth().signOut()
+            .then(() => {
+                // When the user logs out, set the user state on app.js to an empty string
+                this.props.currentUser()
+            })
+    }
+
     render(){
         return(
             <div className="footer__div">
                 <ul className="footer__ul">
                     <li className="footer__li--link">
                         <NavLink to="/home" onClick={() => {
+                            if (this.props.currentPage !== 'home') {
                             this.props.updatePage('home')
-                            this.props.clearSearch();
-                        }
-                            }>My Events</NavLink>
+                            this.props.clearSearch()
+                            }
+                        }}>
+                            My Events
+                        </NavLink>
                     </li>
                     <li className="footer__li--link">
                         <NavLink to="/search" onClick={() => {
                             this.props.updatePage('search')
-                            this.props.clearSearch();
-                        }
-                            }>Search</NavLink>
+                            this.props.clearSearch()
+                            }
+                        }>
+                            Search
+                        </NavLink>
                     </li>
                     <li className="footer__li--link">
-                        <a className="footer__a--back" href="#" onClick={this.goBack}>Back</a>
+                        <a className="login__a--logout" href="" onClick={this.logout}><Link to="/">Logout</Link></a>
                     </li>
                 </ul>
             </div>
