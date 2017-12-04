@@ -34,7 +34,7 @@ export default class CommentBox extends React.Component {
           for (let commentKey in firebaseData) {
             commentData.push(firebaseData[commentKey])
           }
-          
+
           this.setState({
             comments: commentData,
             host: host,
@@ -52,7 +52,7 @@ export default class CommentBox extends React.Component {
 
       dbRef.push(commentInfo)
     }
-  
+
     handleCommentSubmit(comment) {
       // On submit of the Comment-Form, we create a timestamp.
       const timeStamp = () => {

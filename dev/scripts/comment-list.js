@@ -4,9 +4,9 @@ import Comment from "./comment"
 
 
 export default class CommentList extends React.Component {
-  constructor(props) {
-    super(props);
-  }
+  // constructor(props) {
+  //   super(props);
+  // }
   render() {
 
     const commentNodes = this.props.comments.map( (comment) => {
