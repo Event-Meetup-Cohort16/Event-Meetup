@@ -6,7 +6,8 @@ export default class CommentForm extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      commentInfo: {}
+      author: '',
+      text: ''
     };
 
   this.handleTextChange = this.handleTextChange.bind(this)
@@ -19,9 +20,12 @@ export default class CommentForm extends React.Component {
 
   handleSubmit(e){
     e.preventDefault();
+    const author = this.state.author.trim();
     const text = this.state.text.trim();
     if(!text ) { // if input is empty - then do not submit
       return;
+
+      console.log(text)
     }
 
     const timeStamp = () => {
@@ -46,7 +50,8 @@ export default class CommentForm extends React.Component {
       event: this.props.eventID // passed down from comment box
     }
 
-    this.setState({ commentInfo });
+    this.props.submitForm(commentInfo)
+    this.setState({ text: '' });
   }
 
   render() {
