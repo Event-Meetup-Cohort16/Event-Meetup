@@ -40,11 +40,10 @@ html {
 }
 
 body {
-  background: $red;
+  background: rgba(0,0,0,0.1);
 }
   
 .wrapper {
-  // background: rgba(255, 255, 255, 0.7);
   border-radius: 5px;
   margin: 1rem auto;
   max-width: 1600px;
@@ -65,7 +64,7 @@ input, select, textarea {
 
 textarea {
   resize: none;
-  width: 90vw;
+  width: 100%;
 }
 
 ul {

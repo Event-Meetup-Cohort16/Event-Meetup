@@ -13,17 +13,7 @@ export default class Footer extends React.Component {
 
     constructor() {
         super();
-        this.goBack = this.goBack.bind(this)
         this.logout = this.logout.bind(this)
-    }
-
-    goBack(e) {
-        // Prevent page refresh on click
-        e.preventDefault();
-        // Take the user to the top of the page
-        window.scrollTo(0, 0)
-        // This loads the most previous page based on browser history
-        window.history.back();
     }
 
     // Logout Method

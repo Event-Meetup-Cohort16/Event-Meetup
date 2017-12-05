@@ -27,8 +27,6 @@ var config = {
 };
 firebase.initializeApp(config);
 
-const apiURL =  `https://app.ticketmaster.com/discovery/v2/events.json?apikey=uuTnaGAVvta7ICBgb68XcI2AHioUcEKT`;
-
 class App extends React.Component {
   constructor() {
     super()
@@ -72,9 +70,11 @@ class App extends React.Component {
     // The eventSearch variable will represent the queries we will use in our API request
     // Starts as an empty array because it needs to be pushed multiple id queries when querying by eventID
     let queries = [];
+    const apiURL = `https://app.ticketmaster.com/discovery/v2/events.json?apikey=uuTnaGAVvta7ICBgb68XcI2AHioUcEKT`;
 
     // An if/else statement which will determine what will be queried from the API
     // If we are populating the UserEvents component with the events they are going to and the events they have been invited to, we will be making queries by the event id
+
     if (eventID) {
       eventID.forEach(function (item) {
         queries.push(`&id=${item}`)
@@ -126,7 +126,12 @@ class App extends React.Component {
                 }}>Show my Events</Link></button>} />
 
               {/* Routing for the user events page */}
-              <Route path="/home" render={props => <UserEvents currentUser={this.state.user} apiCall={this.apiCall} />} />
+              <Route path="/home" render={props => <UserEvents
+                currentUser={this.state.user}
+                apiCall={this.apiCall}
+                clearSearch={this.clearSearch}
+              />}
+              />
 
               {/* Routing for the search page */}
               <Route path="/search" render={props => <SearchForm apiCall={this.apiCall} />} />
@@ -143,6 +148,7 @@ class App extends React.Component {
                 specificEvent={this.specificEvent}
                 clearSearch={this.clearSearch}
                 apiCall={this.apiCall}
+                noEvents={this.noEvents}
               />
               <Footer clearSearch={this.clearSearch} currentUser={this.currentUser} updatePage={this.updatePage} currentPage={this.state.currentPage} />
 

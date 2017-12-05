@@ -1,7 +1,6 @@
 .eventTile__div {
   float: left;
   margin: 1rem;
-  margin-bottom: 5%;
   width: calc((100% / 3) - 2rem);
   height: 790px;
   transition: all 0.2s;
@@ -17,11 +16,18 @@
 }
 
 .invited {
-  border: 0.5rem solid $khaki;
+  border: 0.5rem solid $teal;
+}
+
+.specific {
+  float: none;
+  width: 50%;
+  min-width: 500px;
+  margin: 0 auto;
 }
 
 .eventTile__div:hover {
-  box-shadow: 2px 4px 5px grey;
+  box-shadow: 0.5rem 0.5rem 0.5rem rgba(0, 0, 0, 0.5);
 }
 
 
@@ -51,27 +57,25 @@ figcaption{
   color: #fff;
 }
 
-.eventTile__figure
-figcaption a{
-  color: #fff;
-  border: 2px solid white;
-  padding: 5px 10px;
-  background: $red;
+.eventTile__figure {
+  img {
+    transition: 0.3s;
+  }
+  figcaption a {
+    color: #fff;
+    border: 2px solid white;
+    padding: 5px 10px;
+    background: $red;
+  }
 }
 
 
 .eventTile__figure:hover img {
     opacity: 0.25;
-    -webkit-transition: all .8s ease;
-    -moz-transition: all .8s ease;
-    transition: all .8s ease;
 }
  
 .eventTile__figure:hover  figcaption{
     opacity: 1;
-    -webkit-transition: all .8s ease;
-    -moz-transition: all .8s ease;
-    transition: all .8s ease;
 }
 
 // this ticketmaster link will only apear on mobile

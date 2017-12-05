@@ -126,15 +126,21 @@ export default class EventTile extends React.Component {
       }
 
       let rsvpClass = '';
-      if (this.state.going === true) {
-        rsvpClass = ' going'
-      } else if (this.state.invited === true) {
-        rsvpClass = ' invited'
+      if (this.props.currentPage === 'home' || this.props.currentPage === 'search') {
+        if (this.state.going === true) {
+          rsvpClass = 'eventTile__div going'
+        } else if (this.state.invited === true) {
+          rsvpClass = 'eventTile__div invited'
+        } else {
+          rsvpClass = 'eventTile__div'
+        }
+      } else {
+        rsvpClass = 'eventTile__div specific'
       }
 
       return (
 
-        <div className={`eventTile__div${rsvpClass}` }>
+        <div className={`${rsvpClass}`}>
             <figure className="eventTile__figure">
               <img className="eventTile__img--eventImage" src={`${this.props.eventImageURL}`} alt={`Promo image for ${this.props.eventName}`} />
               <figcaption className="eventTile__figcaption">  
