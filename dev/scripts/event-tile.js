@@ -125,11 +125,16 @@ export default class EventTile extends React.Component {
         eventGenres = `${this.props.eventGenre}, ${this.props.eventSubGenre}`
       }
 
+      let rsvpClass = '';
+      if (this.state.going === true) {
+        rsvpClass = ' going'
+      } else if (this.state.invited === true) {
+        rsvpClass = ' invited'
+      }
+
       return (
 
-        <div className="eventTile__div">
-
-
+        <div className={`eventTile__div${rsvpClass}`}>
             <figure className="eventTile__figure">
               <img className="eventTile__img--eventImage" src={`${this.props.eventImageURL}`} alt={`Promo image for ${this.props.eventName}`} />
               <figcaption className="eventTile__figcaption">
@@ -137,16 +142,9 @@ export default class EventTile extends React.Component {
               </figcaption>
             </figure>
 
-
-
-        
-          
           <h2 className="eventTile__head--eventName">{this.props.eventName}</h2>
-
           <a className="eventTile__a--eventURL"href={`${this.props.eventURL}`}>See event on Ticketmaster</a>
-
           <p className="eventTile__p--eventTags">{this.props.eventType}, {eventGenres}</p>
-
 
           <p className="eventTile__p--eventDeets">
           {eventDateTime}<br />
@@ -155,7 +153,6 @@ export default class EventTile extends React.Component {
           </p>
 
           <h3 className="eventTile__head--tickets">Tickets on Sale!</h3>
-
           <p className="eventTile__p--ticketSales">{ticketSalesDates}</p>
 
           <EventTileButton
