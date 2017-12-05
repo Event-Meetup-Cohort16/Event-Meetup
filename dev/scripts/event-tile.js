@@ -143,17 +143,22 @@ export default class EventTile extends React.Component {
         <div className={`${rsvpClass}`}>
             <figure className="eventTile__figure">
               <img className="eventTile__img--eventImage" src={`${this.props.eventImageURL}`} alt={`Promo image for ${this.props.eventName}`} />
-              <figcaption className="eventTile__figcaption">
+              <figcaption className="eventTile__figcaption">  
                 <a className="eventTile__a--eventURL" href={`${this.props.eventURL}`}>See event on Ticketmaster</a>
               </figcaption>
             </figure>
 
           <h2 className="eventTile__head--eventName">{this.props.eventName}</h2>
-          <a className="eventTile__a--eventURL"href={`${this.props.eventURL}`}>See event on Ticketmaster</a>
+
+          {/* This link will display on mobile */}
+          <a className="eventTile__a--eventURLMobile"href={`${this.props.eventURL}`}>See event on Ticketmaster</a>
+
           <p className="eventTile__p--eventTags">{this.props.eventType}, {eventGenres}</p>
 
+          <h3>Date & Time:</h3>
           <p className="eventTile__p--eventDeets">
           {eventDateTime}<br />
+          <h3>Location:</h3>
           {this.props.venue}<br />
           {this.props.address}
           </p>
@@ -162,6 +167,7 @@ export default class EventTile extends React.Component {
           <p className="eventTile__p--ticketSales">{ticketSalesDates}</p>
 
           <EventTileButton
+            
             apiCall={this.props.apiCall}
             currentUser={this.props.currentUser}
             rsvp={this.checkRSVP()}

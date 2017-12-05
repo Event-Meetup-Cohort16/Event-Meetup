@@ -2,12 +2,13 @@
   float: left;
   margin: 1rem;
   width: calc((100% / 3) - 2rem);
-  height: 700px;
-  transition: 0.2s;
+  height: 790px;
+  transition: all 0.2s;
   background: white;
   border-radius: 1rem;
   border: 0.5rem solid white;
   position: relative;
+
 }
 
 .going {
@@ -77,6 +78,28 @@ figcaption{
     opacity: 1;
 }
 
+// this ticketmaster link will only apear on mobile
+.eventTile__a--eventURLMobile{
+  display: none;
+}
+
+.eventTile__button--eventPage,
+.eventTile__button--leaveEvent,
+.eventTile__button--addEvent,
+.eventTile__button--acceptInvite,
+.eventTile__button--declineInvite{
+  position:absolute;
+  bottom: 20px;  
+  left:50%;
+  transform: translateX(-57.5%);
+  padding: 1rem;
+  width:15rem;
+}
+
+.eventTile__button--acceptInvite{
+  bottom: 85px;  
+}
+
 @media (max-width: 920px) {
   .eventTile__div {
     width: calc(50% - 2rem);
@@ -86,10 +109,24 @@ figcaption{
 @media (max-width: 620px) {
   .eventTile__div {
     width: calc(100% - 2rem);
-    height: 650px;
+    height: 790px;
   }
 
   .eventTile__figure img {
     height: 185px;
   }
+  // displays the link for ticketmaster as part of the paragraph on mobile (so that no hover state is needed to display all content)
+  .eventTile__a--eventURLMobile{
+    display: block;
+      color: $red;
+  }
+
+  .eventTile__figure
+  figcaption a{
+    display: none;
+  }
+  .eventTile__figure:hover  figcaption{
+    opacity: 0;
+  }
+
 }

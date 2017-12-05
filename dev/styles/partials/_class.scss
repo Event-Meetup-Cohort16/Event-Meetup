@@ -85,7 +85,8 @@
 
 .header__span--tagline {
   text-shadow: 0px 0px black;
-  bottom: 0;
+  position:absolute;
+  bottom: -15%;
   color: black;
   right: 0;
   text-transform: lowercase;
@@ -115,7 +116,6 @@ button:hover,
 .login__a--logout:hover, {
   background: lighten($orange, 5%);
   outline: none;
-  transform: scale(1.1);
 }
 
 // a, button, input, p, select, span, textarea {

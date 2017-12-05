@@ -94,26 +94,36 @@ export default withRouter(class EventTileButton extends React.Component {
   button() {
     if (this.props.rsvp === 'going' && (this.props.currentPage === 'home' || this.props.currentPage === 'search')) {
       return (
-        <button onClick={() => {
-          this.props.clearSearch()
-          this.props.specificEvent(this.props.eventID)
-          this.props.updatePage('event')
-        }}>Event Page</button>
+          <button 
+            className="eventTile__button--eventPage"
+            onClick={() => {
+            this.props.clearSearch()
+            this.props.specificEvent(this.props.eventID)
+            this.props.updatePage('event')
+          }}>Event Page</button>
       )
     } else if (this.props.rsvp === 'invited') {
       return (
         <div>
-          <button onClick={this.acceptInvite}>Accept Invite</button>
-          <button onClick={this.leaveEvent}>Decline Invite</button> 
+          <button 
+          className="eventTile__button--acceptInvite"
+          onClick={this.acceptInvite}>Accept Invite</button>
+          <button 
+          className="eventTile__button--declineInvite"
+          onClick={this.leaveEvent}>Decline Invite</button> 
         </div>
       )
     } else if (this.props.rsvp === 'neither') {
       return (
-        <button onClick={this.addEvent}>Add Event</button>
+        <button 
+        className="eventTile__button--addEvent"
+        onClick={this.addEvent}>Add Event</button>
       )
     } else {
       return (
-        <button onClick={this.leaveEvent}>Leave the Hap</button>
+        <button 
+        className="eventTile__button--leaveEvent"
+        onClick={this.leaveEvent}>Leave the Hap</button>
       )
     }
   }
