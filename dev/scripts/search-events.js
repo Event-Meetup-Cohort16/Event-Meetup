@@ -17,11 +17,12 @@ export default class SearchEvents extends React.Component {
         {this.props.searchResults.map((result) => {
           return (
             <EventTile
+              searchResults={this.props.searchResults}
+              // Our api call method which will be used as a prop
               apiCall={this.props.apiCall}
               // A method we will call to clear the searchResults array on app.js before making a new api call
               clearSearch={this.props.clearSearch}
               // A method that will make an api call when going to the specific event page
-              searchResults={this.props.searchResults}
               specificEvent={this.props.specificEvent}
               // The page the current user is on
               currentPage={this.props.currentPage}

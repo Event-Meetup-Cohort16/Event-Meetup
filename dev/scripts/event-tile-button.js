@@ -63,7 +63,11 @@ export default withRouter(class EventTileButton extends React.Component {
         userEvents.push(goingEvent)
       }
 
-      this.props.apiCall('', '', '', userEvents)
+      if (userEvents.length === 0) {
+        return
+      } else {
+        this.props.apiCall('', '', '', userEvents)
+      }
 
     })
 
@@ -123,7 +127,6 @@ export default withRouter(class EventTileButton extends React.Component {
   }
 
   render() {
-    console.log(this.state.link)
     return (
       <Link
         onClick={this.linkAction()}

@@ -1,8 +1,7 @@
 .eventTile__a--eventURL{
   font-style: bolder;
-  transition: 0.5s all;
+  transition: 0.3s;
   margin-top:2rem;
-  transition: all 0.2;
 }
 
 .active,
@@ -10,6 +9,7 @@
 .eventTile__a--eventURL:focus,
 .eventTile__a--eventURL:hover {
   color: white;
+  background: lighten($khaki, 10%);
 }
 
 .comment__div {
@@ -26,7 +26,7 @@
 }
 
 .footer__ul {
-  background: $teal;
+  background: lighten($red, 0%);
   bottom: 0;
   left: 0;
   margin: 0;
@@ -37,25 +37,19 @@
 }
 
 .footer__li--link {
+  transition: 0.3s;
   a {
     font-size: $footerSize;
+    color: white;
     padding: 1.5rem;
+    transition: 0.3s;
   }
 }
 
-@media (max-width: 620px) {
-  .footer__li--link {
-    width: calc(100% / 3);
-  }
-}
-
-.footer__li--link:active,
-.footer__li--link:focus,
-.footer__li--link:hover {
-  background: $teal;
-  a {
-  color: white;
-  }
+.footer__li--link a:active,
+.footer__li--link a:focus,
+.footer__li--link a:hover {
+  background: $khaki;
 }
 
 .header__div {
@@ -72,10 +66,10 @@
 
 .header__head--brand {
   color: white;
-  text-shadow: 2px 2px $khaki;
+  text-shadow: 2px 2px $teal;
   text-transform: lowercase;
   font-style: oblique;
-  transition: 0.5s all;
+  transition: 0.3s;
 }
 
 .header__head--brand:hover {
@@ -100,15 +94,14 @@
 button,
 .login__a--login,
 .login__a--logout {
-  background: rgba(255,255,255,0.2);
-  // background: #fad89e;
+  background: white;
   box-shadow: 1px 1px 3px grey;
   border-radius: 50px;
   margin: 1rem;
   padding: 1rem 5rem;
   font-style: bolder;
   text-transform: uppercase;
-  transition: all 0.2s;
+  transition: 0.2s;
 }
 
 button:active,
