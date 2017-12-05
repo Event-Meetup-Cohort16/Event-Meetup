@@ -1,3 +1,8 @@
+.home__button--show-events,
+.login__div .login__a--logout {
+  margin-top: 15vh;
+}
+
 .eventTile__a--eventURL{
   font-style: bolder;
   transition: 0.3s;
@@ -53,15 +58,13 @@
 }
 
 .header__div {
-  margin-bottom: 5vh;
-  min-height: 150px;
-  position: relative;
+  text-align: center;
 }
 
 .header__img--logo {
-  float: left;
-  margin: 2rem 25rem 10rem 0;
-  transform: rotate(-45deg);
+  width: 200px;
+  margin-top: 1rem;
+  margin-bottom: 2rem;
 }
 
 .header__head--brand {
@@ -116,6 +119,14 @@ button:hover,
 .login__a--logout:hover, {
   background: lighten($orange, 5%);
   outline: none;
+}
+
+.searchForm__select--city {
+  margin: 1rem;
+}
+
+.inviteUser__input--email {
+  padding: 1rem;
 }
 
 // a, button, input, p, select, span, textarea {

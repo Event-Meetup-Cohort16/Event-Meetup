@@ -118,7 +118,7 @@ class App extends React.Component {
           {this.state.user
           ?
           <div>
-              <Route exact path="/" render={props => <button>
+              <Route exact path="/" render={props => <button className="home__button--show-events">
                 <Link to="/home"
                 onClick={() => {
                 this.updatePage('home')
