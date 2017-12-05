@@ -128,12 +128,17 @@ figcaption{
   }
   .specific {
     min-width: auto;
+    height: auto;
   }
 }
 
 @media (max-width: 500px) {
   .eventTile__figure img {
     height: 175px;
+  }
+  .specific {
+    min-width: auto;
+    height: auto;
   }
 }
 
