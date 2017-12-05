@@ -89,6 +89,9 @@ export default class SearchForm extends React.Component {
               <option className="searchForm__select--keyword" value="Family">
                 Family
               </option>
+              <option className="searchForm__select--keyword" value="Film">
+                Film
+              </option>
               <option className="searchForm__select--keyword" value="Music">
                 Music
               </option>
