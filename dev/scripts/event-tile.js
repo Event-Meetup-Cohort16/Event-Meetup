@@ -128,12 +128,25 @@ export default class EventTile extends React.Component {
       return (
 
         <div className="eventTile__div">
+          <div className="eventTile__figure--container">
+            <figure className="eventTile__figure">
+              <img className="eventTile__img--eventImage" src={`${this.props.eventImageURL}`} alt={`Promo image for ${this.props.eventName}`} />
+              <figcaption className="eventTile__figcaption">
+                <a className="eventTile__a--eventURL" href={`${this.props.eventURL}`}>See event on Ticketmaster</a>
+              </figcaption>
+            </figure>
+          </div>
+        
+          
           <h2 className="eventTile__head--eventName">{this.props.eventName}</h2>
+
+      
 
           <img className="eventTile__img--eventImage" src={`${this.props.eventImageURL}`} alt={`Promo image for ${this.props.eventName}`} />
           <a className="eventTile__a--eventURL"href={`${this.props.eventURL}`}>See event on Ticketmaster</a>
 
           <p className="eventTile__p--eventTags">{this.props.eventType}, {eventGenres}</p>
+
 
           <p className="eventTile__p--eventDeets">
           {eventDateTime}<br />
