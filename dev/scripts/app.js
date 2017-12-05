@@ -40,7 +40,7 @@ class App extends React.Component {
       // state.searchResults will hold an array of event data objects, as returned by the api call, based on users search terms
       searchResults: [],
       // state.specificEventID will be used in the SpecificEvent component to render the event tile when the use wishes to go to the event's specific page
-      specificEventID: ''
+      specificEventID: '',
     }
     this.currentUser = this.currentUser.bind(this);
     this.apiCall = this.apiCall.bind(this);
@@ -66,6 +66,9 @@ class App extends React.Component {
   // If the API call is being used to populate the Search page, then use the first three paramaters, and leave the eventID param as an empty string
   apiCall(keyword, userCity, userCountry, eventID) {
 
+    // Clear old results. Stole this out of clearSearch(), should just call it properly but time is short so if this makes it into production I apologise for the shame I have brought upon my mentors and my team - Jen
+    this.setState({ searchResults: [] })
+
     // The eventSearch variable will represent the queries we will use in our API request
     // Starts as an empty array because it needs to be pushed multiple id queries when querying by eventID
     let queries = [];
@@ -80,8 +83,12 @@ class App extends React.Component {
       queries = `&keyword=${keyword}&city=${userCity}&countryCode=CA`
     }
     axios.get(`${apiURL}${queries}`).then((res)=> {
-      const searchResults = res.data._embedded.events;
-      this.setState({searchResults});
+      if (!res || res.data.page.totalElements === 0) {
+        alert `Looks like nothing's happening. Please try another search!`
+      } else {
+        const searchResults = res.data._embedded.events;
+        this.setState({searchResults});
+      }
     })
   }
 
@@ -138,7 +145,7 @@ class App extends React.Component {
                 apiCall={this.apiCall}
               />
               <Footer clearSearch={this.clearSearch} currentUser={this.currentUser} updatePage={this.updatePage} currentPage={this.state.currentPage} />
-          
+
           </div>
           :
           ''

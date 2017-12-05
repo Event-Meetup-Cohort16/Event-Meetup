@@ -75,9 +75,6 @@ export default class SearchForm extends React.Component {
             <option className="searchForm__option--city" value="Yellowknife">
               Yellowknife
             </option>
-            <option className="searchForm__option--city" value="Iqaluit">
-              Iqaluit
-            </option>
             <option className="searchForm__option--city" value="Whitehorse">
               Whitehorse
             </option>
