@@ -9,7 +9,6 @@ export default class SearchEvents extends React.Component {
   constructor(props) {
     super(props)
   }
-
   render() {
     return (
       <div className="searchEvents__div clearfix">
@@ -58,8 +57,7 @@ export default class SearchEvents extends React.Component {
               address={result._embedded.venues[0].address.line1}
             />
           )
-        })
-        }
+        })}
       </div>
     )
   }

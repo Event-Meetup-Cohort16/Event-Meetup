@@ -33,12 +33,12 @@ class App extends React.Component {
     this.state = {
       // state.user will be used to keep track of who is logged in (or if nobody is logged in)
       user: '',
-      // state.currentpage will be used to keep track of where the user is on the website, and will also be used to conditionally render parts of the EventTile component.
+      // state.currentPage will be used to keep track of where the user is on the website, and will also be used to conditionally render parts of the EventTile component.
       currentPage: '',
       // state.searchResults will hold an array of event data objects, as returned by the api call, based on users search terms
       searchResults: [],
       // state.specificEventID will be used in the SpecificEvent component to render the event tile when the use wishes to go to the event's specific page
-      specificEventID: '',
+      specificEventID: ''
     }
     this.currentUser = this.currentUser.bind(this);
     this.apiCall = this.apiCall.bind(this);
@@ -80,7 +80,7 @@ class App extends React.Component {
         queries.push(`&id=${item}`)
       });
     } else {
-      queries = `&classificationName=${keyword}&city=${userCity}&countryCode=CA`
+      queries = `&classificationName=${keyword}&city=${userCity}&countryCode=CA&size=50`
     }
     axios.get(`${apiURL}${queries}`).then((res)=> {
       if (!res || res.data.page.totalElements === 0) {
