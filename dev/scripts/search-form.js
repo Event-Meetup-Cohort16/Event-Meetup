@@ -6,7 +6,7 @@ export default class SearchForm extends React.Component {
     super(props);
     this.state = {
       keyword: '',
-      userCity: '',
+      userCity: ''
     };
     this.handleChangeKeyword = this.handleChangeKeyword.bind(this);
     this.handleChangeCity = this.handleChangeCity.bind(this);
@@ -14,7 +14,7 @@ export default class SearchForm extends React.Component {
   };
 
   componentDidMount() {
-    this.setState({ keyword: 'Arts&Culture', userCity: 'Calgary'})
+    this.setState({ keyword: 'Arts&Culture', userCity: 'Calgary' })
   }
 
   handleChangeKeyword(e) {
@@ -83,24 +83,24 @@ export default class SearchForm extends React.Component {
 
           {/* Enter the event type you are looking for. e.g. */}
           <select className="searchForm__select--keyword" id="searchForm__select--keyword" name="q" onChange={this.handleChangeKeyword} type="search" value={this.state.value} >
-              <option className="searchForm__select--keyword" value="Arts&Culture">
-                Arts &amp; Culture
-              </option>
-              <option className="searchForm__select--keyword" value="Family">
-                Family
-              </option>
-              <option className="searchForm__select--keyword" value="Film">
-                Film
-              </option>
-              <option className="searchForm__select--keyword" value="Music">
-                Music
-              </option>
-              <option className="searchForm__select--keyword" value="Sports">
-                Sports
-              </option>
-              <option className="searchForm__select--keyword" value="Theatre">
-                Theatre
-              </option>
+            <option className="searchForm__select--keyword" value="Arts&Culture">
+              Arts &amp; Culture
+            </option>
+            <option className="searchForm__select--keyword" value="Family">
+              Family
+            </option>
+            <option className="searchForm__select--keyword" value="Film">
+              Film
+            </option>
+            <option className="searchForm__select--keyword" value="Music">
+              Music
+            </option>
+            <option className="searchForm__select--keyword" value="Sports">
+              Sports
+            </option>
+            <option className="searchForm__select--keyword" value="Theatre">
+              Theatre
+            </option>
           </select>
 
           <button className="searchForm__button--submit" type="submit">Search</button>
