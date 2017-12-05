@@ -80,7 +80,7 @@ class App extends React.Component {
         queries.push(`&id=${item}`)
       });
     } else {
-      queries = `&keyword=${keyword}&city=${userCity}&countryCode=CA`
+      queries = `&classificationName=${keyword}&city=${userCity}&countryCode=CA`
     }
     axios.get(`${apiURL}${queries}`).then((res)=> {
       if (!res || res.data.page.totalElements === 0) {
