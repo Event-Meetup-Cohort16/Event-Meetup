@@ -61,7 +61,8 @@ export default class UserEvents extends React.Component {
         <div className="userEvents__div">
         {this.state.noEvents
         ?
-          <h1 className="userEvents__h1">You're not attending any events! Why not try searching for some? :)</h1>
+        <h2 className="userEvents__h2">You're not attending any events! Why not try searching for some? :)</h2>
+          
         : 
           ''
         }

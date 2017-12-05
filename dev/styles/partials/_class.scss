@@ -1,6 +1,12 @@
+
 .home__button--show-events,
 .login__div .login__a--logout {
   margin-top: 15vh;
+}
+.userEvents__h2{
+  color: lighten($red, 10%);
+  font-size: 30px;
+
 }
 
 .eventTile__a--eventURL{

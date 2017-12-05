@@ -8,6 +8,10 @@
   border-radius: 1rem;
   border: 0.5rem solid white;
   position: relative;
+
+  h3 {
+    margin-bottom: 0;
+  }
 }
 
 .going {
@@ -22,6 +26,7 @@
   float: none;
   width: 50%;
   min-width: 500px;
+  height: auto;
   margin: 0 auto;
 }
 
@@ -83,7 +88,6 @@ figcaption{
 }
 
 .eventTile__button--eventPage,
-.eventTile__button--leaveEvent,
 .eventTile__button--addEvent,
 .eventTile__button--acceptInvite,
 .eventTile__button--declineInvite{
@@ -100,6 +104,20 @@ figcaption{
 }
 
 @media (max-width: 1080px) {
+
+.eventTile__button--leaveEvent{
+  position:absolute;
+  bottom: -10%;  
+  left:50%;
+  transform: translateX(-55%);
+  padding: 1rem;
+  width:15rem;
+}
+
+
+
+
+@media (max-width: 920px) {
   .eventTile__div {
     width: calc(50% - 2rem);
   }
