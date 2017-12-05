@@ -1,8 +1,8 @@
 .eventTile__div {
   float: left;
-  margin: 2px;
+  margin: 1rem;
   margin-bottom: 5%;
-  width: 33%;
+  width: calc((100% / 3) - 2rem);
   height: 700px;
   transition: all 0.2s;
 }
@@ -72,12 +72,12 @@ figcaption a{
 
 @media (max-width: 920px) {
   .eventTile__div {
-    width: 50%;
+    width: calc(50% - 2rem);
   }
 }
 
 @media (max-width: 620px) {
   .eventTile__div {
-    width: 100%;
+    width: calc(100% - 2rem);
   }
 }
