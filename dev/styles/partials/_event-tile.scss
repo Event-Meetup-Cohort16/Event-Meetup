@@ -8,6 +8,7 @@
   border-radius: 1rem;
   border: 0.5rem solid white;
   position: relative;
+
   h3 {
     margin-bottom: 0;
   }
@@ -102,13 +103,7 @@ figcaption{
   bottom: 85px;  
 }
 
-// .eventTile__button--leaveEvent{
-//   position:absolute;
-//   top: 10px;  
-//   right:10px;
-//   padding: 1rem;
-//   width:15rem;
-// }
+@media (max-width: 1080px) {
 
 .eventTile__button--leaveEvent{
   position:absolute;
@@ -128,15 +123,25 @@ figcaption{
   }
 }
 
-@media (max-width: 620px) {
+@media (max-width: 720px) {
   .eventTile__div {
     width: calc(100% - 2rem);
     height: 790px;
   }
-
   .eventTile__figure img {
-    height: 185px;
+    height: 275px;
   }
+  .specific {
+    min-width: auto;
+  }
+}
+
+@media (max-width: 500px) {
+  .eventTile__figure img {
+    height: 175px;
+  }
+}
+
   // displays the link for ticketmaster as part of the paragraph on mobile (so that no hover state is needed to display all content)
   .eventTile__a--eventURLMobile{
     display: block;
@@ -150,5 +155,3 @@ figcaption{
   .eventTile__figure:hover  figcaption{
     opacity: 0;
   }
-
-}

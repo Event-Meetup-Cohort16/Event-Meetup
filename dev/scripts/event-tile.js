@@ -167,7 +167,6 @@ export default class EventTile extends React.Component {
           <p className="eventTile__p--ticketSales">{ticketSalesDates}</p>
 
           <EventTileButton
-            
             apiCall={this.props.apiCall}
             currentUser={this.props.currentUser}
             rsvp={this.checkRSVP()}
