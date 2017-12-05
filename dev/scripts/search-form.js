@@ -2,19 +2,20 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 
 export default class SearchForm extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
     this.state = {
       keyword: '',
-      userCity:'',
-      userCountry:'',
+      userCity: '',
     };
-
     this.handleChangeKeyword = this.handleChangeKeyword.bind(this);
     this.handleChangeCity = this.handleChangeCity.bind(this);
-    this.handleChangeCountry = this.handleChangeCountry.bind(this);
     this.handleSubmit = this.handleSubmit.bind(this);
   };
+
+  componentDidMount() {
+    this.setState({ keyword: 'Music', userCity: 'Toronto'})
+  }
 
   handleChangeKeyword(e) {
     this.setState({ keyword: e.target.value });
@@ -22,89 +23,80 @@ export default class SearchForm extends React.Component {
   handleChangeCity(e) {
     this.setState({ userCity: e.target.value });
   };
-  handleChangeCountry(e) {
-    this.setState({ userCountry: e.target.value });
-  };
-
 
   handleSubmit(e) {
     e.preventDefault();
     //this will be the axios request (apiCall)
-    this.props.apiCall(this.state.keyword, this.state.userCity, this.state.userCountry, '');
-    //on submit, clear the inputs stored in searchForm state
-    this.setState({
-      keyword: '',
-      userCity: '',
-      userCountry: '' });
+    this.props.apiCall(this.state.keyword, this.state.userCity);
   };
   render() {
     return (
         <form className="searchForm__form" action="" id="searchForm__form" onSubmit={this.handleSubmit} role="search">
 
           {/* Enter a city  */}
-          <select className="searchForm__select--city" id="searchForm__select--city" name="city" onChange={this.handleChangeCity} placeholder="Enter a Canadian city" type="search"value={this.state.city}>
+          <select className="searchForm__select--city" id="searchForm__select--city" name="city" onChange={this.handleChangeCity} type="search" value={this.state.value}>
 
-            <option className="searchForm__option--city">
+            <option className="searchForm__option--city" value="Toronto">
               Toronto
             </option>
-            <option className="searchForm__option--city">
+            <option className="searchForm__option--city" value="Montreal">
               Montreal
             </option>
-            <option className="searchForm__option--city">
+            <option className="searchForm__option--city" value="Ottawa">
               Ottawa
             </option>
-            <option className="searchForm__option--city">
+            <option className="searchForm__option--city" value="Edmonton">
               Edmonton
             </option>
-            <option className="searchForm__option--city">
+            <option className="searchForm__option--city" value="Victoria">
               Victoria
             </option>
-            <option className="searchForm__option--city">
+            <option className="searchForm__option--city" value="Winnipeg">
               Winnipeg
             </option>
-            <option className="searchForm__option--city">
+            <option className="searchForm__option--city" value="Fredericton">
               Fredericton
             </option>
-            <option className="searchForm__option--city">
+            <option className="searchForm__option--city" value="St Johns">
               St. John's
             </option>
-            <option className="searchForm__option--city">
+            <option className="searchForm__option--city" value="Halifax">
               Halifax
             </option>
-            <option className="searchForm__option--city">
+            <option className="searchForm__option--city" value="Charlottetown">
               Charlottetown
             </option>
-            <option className="searchForm__option--city">
+            <option className="searchForm__option--city" value="Quebec City">
               Quebec City
             </option>
-            <option className="searchForm__option--city">
+            <option className="searchForm__option--city" value="Regina">
               Regina
             </option>
-            <option className="searchForm__option--city">
+            <option className="searchForm__option--city" value="Yellowknife">
               Yellowknife
             </option>
-            <option className="searchForm__option--city">
-              Iqaluit
-            </option>
-            <option className="searchForm__option--city">
+            <option className="searchForm__option--city" value="Whitehorse">
               Whitehorse
             </option>
 
           </select>
 
           {/* Enter the event type you are looking for. e.g. */}
-          <select className="searchForm__select--keyword" id="searchForm__select--keyword" name="q" onChange={this.handleChangeKeyword} placeholder="Enter the event type you are looking for. e.g." type="search" value={this.state.keyword} >
-              <option className="searchForm__select--keyword">
+          <select className="searchForm__select--keyword" id="searchForm__select--keyword" name="q" onChange={this.handleChangeKeyword} type="search" value={this.state.value} >
+              <option className="searchForm__select--keyword" value="Music">
                 Music
               </option>
-              <option className="searchForm__select--keyword">
-                Arts & Culture
+              <option className="searchForm__select--keyword" value="Arts&Culture">
+                Arts &amp; Culture
               </option>
-              <option className="searchForm__select--keyword">
+              <option className="searchForm__select--keyword" value="Family">
+                Family
+              </option>
+              <option className="searchForm__select--keyword" value="Sports">
                 Sports
               </option>
-              <option className="searchForm__select--keyword">
-                Family
+              <option className="searchForm__select--keyword" value="Theatre">
+                Theatre
               </option>
           </select>
 

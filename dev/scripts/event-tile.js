@@ -42,7 +42,6 @@ export default class EventTile extends React.Component {
       let exists = snapshot.val();
 
       if (exists !== null) {
-        console.log(this.props.currentUser)
         const host = this.props.currentUser.email.replace(/\./g, ',');
         let ref = firebase.database().ref(`users/${toEmail}/events/${this.props.eventID}`);
 
@@ -54,7 +53,7 @@ export default class EventTile extends React.Component {
 
       // If friend is not in database, send invite email
       } else {
-        document.location.href = `mailto:${friend}?subject=What's%20%20the%20Haps?&body=A%20friend%20has%20invited%20you%20to%20a%20meetup!%20Create%20an%20account%20to%20find%20out%20the%20Haps:%20http://whatsthehaps.com/thisisafakeURL`;
+        document.location.href = `mailto:${friend}?subject=What's%20%20the%20Haps?&body=A%20friend%20has%20invited%20you%20to%20a%20meetup!%20Create%20an%20account%20to%20find%20out%20the%20Haps:%20http://thehaps.com/thisisafakeURL`;
       }
     })
   }
@@ -118,6 +117,14 @@ export default class EventTile extends React.Component {
         // Get rid of the seconds indicator in the event time
         .replace(/:[0-9]{2}$/g, '')
 
+      // Avoid displaying subGenre if it's the same as Genre
+      let eventGenres = ''
+      if (`${this.props.eventGenre}` === `${this.props.eventSubGenre}`) {
+        eventGenres = `${this.props.eventGenre}`
+      } else {
+        eventGenres = `${this.props.eventGenre}, ${this.props.eventSubGenre}`
+      }
+
       return (
 
         <div className="eventTile__div">
@@ -133,7 +140,13 @@ export default class EventTile extends React.Component {
           
           <h2 className="eventTile__head--eventName">{this.props.eventName}</h2>
 
-          <p className="eventTile__p--eventTags">{this.props.eventType}, {this.props.eventGenre}, {this.props.eventSubGenre}</p>
+      
+
+          <img className="eventTile__img--eventImage" src={`${this.props.eventImageURL}`} alt={`Promo image for ${this.props.eventName}`} />
+          <a className="eventTile__a--eventURL"href={`${this.props.eventURL}`}>See event on Ticketmaster</a>
+
+          <p className="eventTile__p--eventTags">{this.props.eventType}, {eventGenres}</p>
+
 
           <p className="eventTile__p--eventDeets">
           {eventDateTime}<br />
@@ -161,7 +174,7 @@ export default class EventTile extends React.Component {
             render={props => <InviteUser submitEmail={this.sendEmail} />} />
 
           <Route path="/event/:event"
-            render={props => <CommentBox 
+            render={props => <CommentBox
             eventID={this.props.eventID}
             searchResults={this.props.searchResults}
             userEmail={this.props.currentUser.email} />} />
