@@ -7,6 +7,16 @@
   transition: all 0.2s;
   background: white;
   border-radius: 1rem;
+  border: 0.5rem solid white;
+  position: relative;
+}
+
+.going {
+  border: 0.5rem solid $orange;
+}
+
+.invited {
+  border: 0.5rem solid $khaki;
 }
 
 .eventTile__div:hover {
@@ -25,7 +35,7 @@
   height: 225px;
   position: relative;
   object-fit: cover;
-  border-radius: 1rem 1rem 0 0;
+  border-radius: 0.5rem 0.5rem 0 0;
  
 }
 
