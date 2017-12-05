@@ -22,6 +22,7 @@
   border: 0.5rem solid $teal;
 }
 
+
 .specific {
   float: none;
   width: 50%;
@@ -34,11 +35,9 @@
   box-shadow: 0.5rem 0.5rem 0.5rem rgba(0, 0, 0, 0.5);
 }
 
-
 .eventTile__figure{
   position: relative;
 }
-
 
 .eventTile__figure img{ 
   background: linear-gradient(180deg,black, transparent);
@@ -47,7 +46,6 @@
   position: relative;
   object-fit: cover;
   border-radius: 0.5rem 0.5rem 0 0;
- 
 }
 
 .eventTile__figure
@@ -72,7 +70,6 @@ figcaption{
     background: $red;
   }
 }
-
 
 .eventTile__figure:hover img {
     opacity: 0.25;
@@ -105,17 +102,15 @@ figcaption{
 
 @media (max-width: 1080px) {
 
-.eventTile__button--leaveEvent{
-  position:absolute;
-  bottom: -10%;  
-  left:50%;
-  transform: translateX(-55%);
-  padding: 1rem;
-  width:15rem;
+  .eventTile__button--leaveEvent{
+    position:absolute;
+    bottom: -10%;  
+    left:50%;
+    transform: translateX(-55%);
+    padding: 1rem;
+    width:15rem;
+  }
 }
-
-
-
 
 @media (max-width: 920px) {
   .eventTile__div {
@@ -148,10 +143,9 @@ figcaption{
       color: $red;
   }
 
-  .eventTile__figure
-  figcaption a{
+  .eventTile__figure figcaption a {
     display: none;
   }
-  .eventTile__figure:hover  figcaption{
+  .eventTile__figure:hover  figcaption {
     opacity: 0;
   }
