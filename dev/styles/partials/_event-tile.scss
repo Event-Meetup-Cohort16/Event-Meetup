@@ -5,35 +5,34 @@
   width: calc((100% / 3) - 2rem);
   height: 700px;
   transition: all 0.2s;
+  background: white;
+  border-radius: 1rem;
 }
 
 .eventTile__div:hover {
   box-shadow: 2px 4px 5px grey;
-  border-radius: 10px 10px;
-  
 }
 
 
 .eventTile__figure{
   position: relative;
-  background: #000;
-  border-radius: 10px 10px 0% 0%;
-  height: 250px;
 }
 
 
-.eventTile__figure figure img{ 
+.eventTile__figure img{ 
   background: linear-gradient(180deg,black, transparent);
-  max-height:100%;
+  width: 100%;
+  height: 225px;
   position: relative;
-  object-fit: fill;
+  object-fit: cover;
+  border-radius: 1rem 1rem 0 0;
  
 }
 
 .eventTile__figure
 figcaption{
   position: absolute;
-  top: 25%;
+  top: 32%;
   left: 0;
   width: 100%;
   text-align: center;
@@ -73,5 +72,10 @@ figcaption a{
 @media (max-width: 620px) {
   .eventTile__div {
     width: calc(100% - 2rem);
+    height: 650px;
+  }
+
+  .eventTile__figure img {
+    height: 185px;
   }
 }
