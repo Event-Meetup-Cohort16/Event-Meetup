@@ -2,7 +2,7 @@
   float: left;
   margin: 1rem;
   width: calc((100% / 3) - 2rem);
-  height: 790px;
+  height: 740px;
   transition: all 0.2s;
   background: white;
   border-radius: 1rem;
@@ -121,7 +121,6 @@ figcaption{
 @media (max-width: 720px) {
   .eventTile__div {
     width: calc(100% - 2rem);
-    height: 790px;
   }
   .eventTile__figure img {
     height: 275px;

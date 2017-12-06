@@ -155,16 +155,13 @@ export default class EventTile extends React.Component {
 
           <p className="eventTile__p--eventTags">{this.props.eventType}, {eventGenres}</p>
 
-          <h3>Date & Time:</h3>
+          <h3>Date &amp; Time:</h3>
           <p className="eventTile__p--eventDeets">
           {eventDateTime}<br />
           <h3>Location:</h3>
           {this.props.venue}<br />
           {this.props.address}
           </p>
-
-          <h3 className="eventTile__head--tickets">Tickets on Sale!</h3>
-          <p className="eventTile__p--ticketSales">{ticketSalesDates}</p>
 
           <EventTileButton
             apiCall={this.props.apiCall}
