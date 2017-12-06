@@ -53,7 +53,7 @@ export default class EventTile extends React.Component {
 
       // If friend is not in database, send invite email
       } else {
-        document.location.href = `mailto:${friend}?subject=What's%20%20the%20Haps?&body=A%20friend%20has%20invited%20you%20to%20a%20meetup!%20Create%20an%20account%20to%20find%20out%20the%20Haps:%20http://thehaps.com/thisisafakeURL`;
+        document.location.href = `mailto:${friend}?subject=What's%20%20the%20Haps?&body=A%20friend%20has%20invited%20you%20to%20a%20meetup!%20Create%20an%20account%20to%20find%20out%20the%20Haps:%20https://what-s-the-haps.firebaseapp.com`;
       }
     })
   }
@@ -143,7 +143,7 @@ export default class EventTile extends React.Component {
         <div className={`${rsvpClass}`}>
             <figure className="eventTile__figure">
               <img className="eventTile__img--eventImage" src={`${this.props.eventImageURL}`} alt={`Promo image for ${this.props.eventName}`} />
-              <figcaption className="eventTile__figcaption">  
+              <figcaption className="eventTile__figcaption">
                 <a className="eventTile__a--eventURL" href={`${this.props.eventURL}`}>See event on Ticketmaster</a>
               </figcaption>
             </figure>
